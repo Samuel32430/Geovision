@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<body>
+<main class="main" th:fragment="main">
+    <div th:replace="~{layout/topbar :: topbar}"></div>
+
+    <div class="content">
+        <section th:replace="~{dashboard/components/stats :: stats}"></section>
+        <section th:replace="~{dashboard/components/panels :: panels}"></section>
+    </div>
+</main>
+</body>
+</html>
