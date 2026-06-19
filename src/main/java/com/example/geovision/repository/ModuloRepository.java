@@ -1,4 +1,7 @@
 package com.example.geovision.repository;
 
-public interface ModuloRepository {
+import com.example.geovision.models.Modulo;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ModuloRepository extends JpaRepository<Modulo, Long> {
 }

@@ -1,4 +1,7 @@
 package com.example.geovision.repository;
 
-public interface UsuarioSesionRepository {
+import com.example.geovision.models.UsuarioSesion;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UsuarioSesionRepository extends JpaRepository<UsuarioSesion, Long> {
 }

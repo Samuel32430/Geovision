@@ -1,4 +1,7 @@
 package com.example.geovision.service;
 
-public interface RecuperacionContrasenaService {
+import com.example.geovision.generic.CrudService;
+import com.example.geovision.models.RecuperacionContrasena;
+
+public interface RecuperacionContrasenaService extends CrudService<RecuperacionContrasena, Long> {
 }

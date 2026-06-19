@@ -1,4 +1,7 @@
 package com.example.geovision.service;
 
-public interface PermisoService {
+import com.example.geovision.generic.CrudService;
+import com.example.geovision.models.Permiso;
+
+public interface PermisoService extends CrudService<Permiso, Long> {
 }

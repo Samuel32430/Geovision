@@ -1,4 +1,7 @@
 package com.example.geovision.service;
 
-public interface PersonaService {
+import com.example.geovision.generic.CrudService;
+import com.example.geovision.models.Persona;
+
+public interface PersonaService extends CrudService<Persona, Long> {
 }

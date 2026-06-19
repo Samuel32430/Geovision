@@ -1,4 +1,0 @@
-package com.example.geovision.service;
-
-public interface RolPermiso {
-}
