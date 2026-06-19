@@ -1,4 +1,43 @@
 package com.example.geovision.serviceImpl;
 
-public class UsuarioServiceImpl {
+import com.example.geovision.models.Usuario;
+import com.example.geovision.repository.UsuarioRepository;
+import com.example.geovision.service.UsuarioService;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
+
+@Service
+public class UsuarioServiceImpl implements UsuarioService {
+
+    private final UsuarioRepository usuarioRepository;
+
+    public UsuarioServiceImpl(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
+    @Override
+    public Usuario save(Usuario entity) {
+        return usuarioRepository.save(entity);
+    }
+
+    @Override
+    public Usuario findById(Long id) {
+        return usuarioRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Usuario> read(Long id) {
+        return usuarioRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Usuario> findAll() {
+        return usuarioRepository.findAll();
+    }
 }

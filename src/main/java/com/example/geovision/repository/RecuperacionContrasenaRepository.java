@@ -1,4 +1,7 @@
 package com.example.geovision.repository;
 
-public interface RecuperacionContrasenaRepository {
+import com.example.geovision.models.RecuperacionContrasena;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface RecuperacionContrasenaRepository extends JpaRepository<RecuperacionContrasena, Long> {
 }

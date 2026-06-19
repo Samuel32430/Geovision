@@ -1,4 +1,7 @@
 package com.example.geovision.repository;
 
-public interface ExamenAgudezaVisualRepository {
+import com.example.geovision.models.ExamenAgudezaVisual;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ExamenAgudezaVisualRepository extends JpaRepository<ExamenAgudezaVisual, Long> {
 }

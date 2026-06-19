@@ -1,4 +1,7 @@
 package com.example.geovision.service;
 
-public interface RolService {
+import com.example.geovision.generic.CrudService;
+import com.example.geovision.models.Rol;
+
+public interface RolService extends CrudService<Rol, Long> {
 }

@@ -1,4 +1,7 @@
 package com.example.geovision.service;
 
-public interface ExamenAgudezaVisualService {
+import com.example.geovision.generic.CrudService;
+import com.example.geovision.models.ExamenAgudezaVisual;
+
+public interface ExamenAgudezaVisualService extends CrudService<ExamenAgudezaVisual, Long> {
 }
