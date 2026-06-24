@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Geo Vision - Gestión de Usuarios</title>
+    <title>Geo Vision - Rol</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
 </head>
 <body>
@@ -52,13 +52,13 @@
                 </span>
             Seguridad
         </a>
-        <a th:href="@{/usuarios}" class="active" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+        <a th:href="@{/usuarios}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
                 <span class="icon">
                     <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
                 </span>
             Gestión de Usuarios
         </a>
-        <a th:href="@{/roles}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+        <a th:href="@{/roles}" class="active" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
                 <span class="icon">
                     <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
                 </span>
@@ -83,50 +83,40 @@
 <!-- Main -->
 <main class="main">
     <div class="topbar">
-        <h2>Gestión de Usuarios</h2>
+        <h2 th:text="${rol.id == null} ? 'Nuevo rol' : 'Editar rol'"></h2>
         <div class="divider"></div>
         <span class="date">Módulo de Seguridad</span>
-        <div class="actions">
-            <a th:href="@{/usuarios/nuevo}" class="new-sale-btn">+ Registrar usuario</a>
-        </div>
     </div>
 
     <div class="content">
         <div class="panel">
-            <form method="get" th:action="@{/usuarios}" style="margin-bottom:20px;">
-                <input class="login-input" type="text" name="q" th:value="${q}" placeholder="Buscar por usuario o rol...">
-            </form>
+            <form th:object="${rol}"
+                  th:action="${rol.id == null} ? @{/roles} : @{/roles/{id}(id=${rol.id})}"
+                  method="post" class="login-form">
+                <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Registro</th>
-                    <th>Estado</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="usuario : ${usuarios}">
-                    <td th:text="${usuario.usuarioLogin}"></td>
-                    <td th:text="${usuario.empleado.persona.correo}"></td>
-                    <td th:text="${usuario.rol.nombreRol}"></td>
-                    <td th:text="${usuario.fechaRegistro}"></td>
-                    <td th:text="${usuario.estado}"></td>
-                    <td>
-                        <a th:href="@{/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
-                        &nbsp;
-                        <form th:action="@{/usuarios/{id}/estado(id=${usuario.id})}" method="post" style="display:inline">
-                            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                            <button type="submit" th:text="${usuario.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
-                        </form>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <div class="empty" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</div>
+                <label class="login-label" for="nombreRol">Nombre del rol</label>
+                <input class="login-input" type="text" id="nombreRol" th:field="*{nombreRol}" required>
+
+                <label class="login-label" for="descripcion">Descripción</label>
+                <input class="login-input" type="text" id="descripcion" th:field="*{descripcion}">
+
+                <label class="login-label" for="estado">Estado</label>
+                <select class="login-input" id="estado" th:field="*{estado}" required>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
+                </select>
+
+                <label class="login-label">Módulos permitidos</label>
+                <div th:each="permiso : ${permisos}" style="display:flex; align-items:center; gap:8px; padding:6px 0;">
+                    <input type="checkbox" name="idsPermiso" th:value="${permiso.id}" th:id="${'permiso-' + permiso.id}"
+                           th:checked="${idsPermisoAsignados.contains(permiso.id)}">
+                    <label th:for="${'permiso-' + permiso.id}" th:text="${permiso.modulo.nombreModulo}"></label>
+                </div>
+
+                <button type="submit" class="new-sale-btn login-submit">Guardar</button>
+                <a th:href="@{/roles}" style="margin-top:10px; text-align:center; color:#6b8a86;">Cancelar</a>
+            </form>
         </div>
     </div>
 </main>

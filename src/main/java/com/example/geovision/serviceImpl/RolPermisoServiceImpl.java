@@ -5,6 +5,7 @@ import com.example.geovision.repository.RolPermisoRepository;
 import com.example.geovision.service.RolPermisoService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,10 @@ public class RolPermisoServiceImpl implements RolPermisoService {
     @Override
     public Iterable<RolPermiso> findAll() {
         return rolPermisoRepository.findAll();
+    }
+
+    @Override
+    public List<RolPermiso> findByRolId(Long idRol) {
+        return rolPermisoRepository.findByRol_Id(idRol);
     }
 }
