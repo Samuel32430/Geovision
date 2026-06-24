@@ -5,6 +5,7 @@ import com.example.geovision.repository.ExamenAgudezaVisualRepository;
 import com.example.geovision.service.ExamenAgudezaVisualService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,15 @@ public class ExamenAgudezaVisualServiceImpl implements ExamenAgudezaVisualServic
     @Override
     public Iterable<ExamenAgudezaVisual> findAll() {
         return examenAgudezaVisualRepository.findAll();
+    }
+
+    @Override
+    public List<ExamenAgudezaVisual> findByPacienteId(Long idPaciente) {
+        return examenAgudezaVisualRepository.findByPacienteId(idPaciente);
+    }
+
+    @Override
+    public List<ExamenAgudezaVisual> findByPacienteIdAndActivo(Long idPaciente) {
+        return examenAgudezaVisualRepository.findByPacienteIdAndActivo(idPaciente);
     }
 }

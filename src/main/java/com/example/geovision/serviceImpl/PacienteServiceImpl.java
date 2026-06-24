@@ -5,6 +5,7 @@ import com.example.geovision.repository.PacienteRepository;
 import com.example.geovision.service.PacienteService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -39,5 +40,15 @@ public class PacienteServiceImpl implements PacienteService {
     @Override
     public Iterable<Paciente> findAll() {
         return pacienteRepository.findAll();
+    }
+
+    @Override
+    public List<Paciente> buscarPorNombreTelefonoODni(String busqueda) {
+        return pacienteRepository.buscarPorNombreTelefonoODni(busqueda);
+    }
+
+    @Override
+    public Paciente findByDni(String dni) {
+        return pacienteRepository.findByDni(dni);
     }
 }
