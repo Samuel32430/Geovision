@@ -278,6 +278,12 @@
     cursor: pointer;
     position: relative;
 }
+.user-stado-inactivo:has(input:checked){
+
+    background: #f7e9e9;
+    border-color: #9d2a2a;
+    color: #7a1f1f;
+}
 
 .usr-estado-option input {
     position: absolute;

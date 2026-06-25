@@ -1,4 +1,48 @@
 /* ---------- Roles y Permisos ---------- */
+.rol-toolbar {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgb(57 66 63 / 0.15);
+    padding: 14px 20px;
+    margin-bottom: 22px;
+}
+
+.rol-toolbar-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #F7F9FB;
+    border: 1px solid #e3efec;
+    border-radius: 10px;
+    padding: 10px 14px;
+    max-width: 360px;
+}
+
+.rol-toolbar-icon {
+    color: #9ba8a8;
+    flex-shrink: 0;
+}
+
+.rol-toolbar-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #0f1717;
+    width: 100%;
+}
+
+.rol-toolbar-input::placeholder {
+    color: #9ba8a8;
+}
+
+.rol-panel {
+    padding: 0;
+    overflow: hidden;
+}
+.usr-rol .table thead tr {
+    background: #EEF2F6;
+}
 .rol-panel .table td {
     padding: 16px 0;
     font-size: 14px;
@@ -8,6 +52,13 @@
 
 .rol-panel .table tbody tr:hover {
     background: #f8fcfb;
+}
+.rol-panel .table th {
+    padding: 14px 16px;
+}
+.rol-panel .table th:first-child,
+.rol-panel .table td:first-child {
+    padding-left: 28px;
 }
 
 .rol-badge {
@@ -29,24 +80,20 @@
     color: #c0392b;
 }
 
-.rol-permisos-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 16px;
-    margin-bottom: 6px;
-}
-
 .rol-selected-count {
     font-size: 13px;
     font-weight: 700;
     color: #2bb3a3;
+    background: #e6f5f1;
+    padding: 6px 14px;
+    border-radius: 999px;
+    flex-shrink: 0;
 }
 
 .rol-permisos-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
 }
 
 .rol-permiso-card {
@@ -60,14 +107,24 @@
     pointer-events: none;
 }
 
+.rol-panel tbody td {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.rol-panel tbody tr:hover td{
+    background-color: #ececec;
+}
+
 .rol-permiso-card-body {
+    position: relative;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
     background: #ffffff;
     border: 1.5px solid #e3efec;
     border-radius: 12px;
-    padding: 12px 16px;
+    padding: 16px;
     transition: all 0.15s;
 }
 
@@ -80,6 +137,17 @@
     background: #eafaf7;
 }
 
+.rol-permiso-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: #e6f5f1;
+    color: #2bb3a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .rol-permiso-title {
     font-weight: 600;
     font-size: 14px;
@@ -87,10 +155,14 @@
 }
 
 .rol-permiso-check {
-    width: 20px;
-    height: 20px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 2px solid #cfd8d6;
+    background: #ffffff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,3 +177,140 @@
     color: #ffffff;
 }
 
+/* ---------- Roles: formulario ---------- */
+.rol-form-topbar {
+    justify-content: space-between;
+}
+
+.rol-form-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.rol-form-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2bb3a3;
+}
+
+.rol-form-breadcrumb-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid #2bb3a3;
+}
+
+.rol-form-editing-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #e6f5f1;
+    color: #1f8f82;
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.rol-form-editing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #2bb3a3;
+}
+
+.rol-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rol-form-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 22px;
+}
+
+.rol-form-card-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #e6f5f1;
+    color: #2bb3a3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.rol-form-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #0f1717;
+}
+
+.rol-form-card-subtitle {
+    margin-top: 2px;
+    font-size: 13px;
+    color: #6b8a86;
+}
+
+.rol-form-card-header .rol-selected-count {
+    margin-left: auto;
+}
+
+.rol-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+}
+
+.rol-form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.rol-form-field .login-label {
+    margin-top: 0;
+}
+
+.rol-form-field-full {
+    margin-top: 18px;
+}
+
+.rol-form-textarea {
+    resize: vertical;
+    min-height: 90px;
+    font-family: inherit;
+}
+
+.rol-form-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+.rol-form-footer .form-cancel {
+    margin-top: 0;
+    text-align: left;
+}
+
+@media (max-width: 720px) {
+    .rol-form-grid { grid-template-columns: 1fr; }
+    .rol-permisos-grid { grid-template-columns: 1fr; }
+}
+
+.btn-desactivar{
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-desactivar:hover{
+    background-color: #fab8b2;
+    color: red;
+}
