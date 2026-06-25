@@ -1,0 +1,41 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.login-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #2d3a3a;
+    margin-top: 16px;
+    margin-bottom: 6px;
+}
+
+.login-input {
+    padding: 10px 14px;
+    border: 1px solid #cfd8d6;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #0f1717;
+}
+
+.login-input:focus {
+    outline: none;
+    border-color: #2bb3a3;
+}
+
+.login-submit {
+    margin-top: 24px;
+    justify-content: center;
+}
+
+.form-cancel {
+    margin-top: 10px;
+    text-align: center;
+    color: #6b8a86;
+}
+
+.form-section-label {
+    margin: 0;
+}

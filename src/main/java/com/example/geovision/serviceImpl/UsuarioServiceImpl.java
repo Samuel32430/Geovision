@@ -3,6 +3,8 @@ package com.example.geovision.serviceImpl;
 import com.example.geovision.models.Usuario;
 import com.example.geovision.repository.UsuarioRepository;
 import com.example.geovision.service.UsuarioService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -40,4 +42,16 @@ public class UsuarioServiceImpl implements UsuarioService {
     public Iterable<Usuario> findAll() {
         return usuarioRepository.findAll();
     }
+
+    /*@Override
+    public Page<Usuario> findPage(String busqueda, Pageable pageable) {
+        if(busqueda == null || busqueda.isBlank()){
+            return usuarioRepository.findAll(pageable);
+        }
+        return  usuarioRepository.findByUsuarioLoginContainingIgnoreCaseOrRol_NombreRolContainingIgnoreCase(
+                busqueda,
+                busqueda,
+                pageable
+        );
+    }*/
 }

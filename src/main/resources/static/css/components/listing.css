@@ -1,0 +1,102 @@
+/* ---------- Panels ---------- */
+.panels {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 22px;
+    margin-top: 26px;
+}
+
+.panel {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 26px 28px;
+    min-height: 340px;
+    border: 1px solid rgb(57 66 63 / 0.15);
+}
+
+.panel h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f1717;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.panel h3 .warn-icon { color: #d99110; }
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th {
+    text-align: left;
+    font-size: 14px;
+    color: #0f1717;
+    font-weight: 700;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #eef3f1;
+}
+
+.empty {
+    text-align: center;
+    padding: 60px 0;
+    color: #9ba8a8;
+    font-style: italic;
+}
+
+/* ---------- Icons (svg base sizes) ---------- */
+svg.feather {
+    width: 18px;
+    height: 18px;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+}
+
+svg.feather.lg { width: 22px; height: 22px; }
+
+.rol-table-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rol-edit-link {
+    color: #2bb3a3;
+    font-weight: 700;
+    font-size: 13px;
+    text-decoration: none;
+}
+
+.rol-edit-link:hover {
+    text-decoration: underline;
+}
+
+.rol-toggle-btn {
+    background: none;
+    border: 1px solid #e3efec;
+    color: #6b8a86;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.rol-toggle-btn:hover {
+    background: #f1faf8;
+}
+
+.list-filter {
+    margin-bottom: 20px;
+}
+
+.inline-form {
+    display: inline;
+}

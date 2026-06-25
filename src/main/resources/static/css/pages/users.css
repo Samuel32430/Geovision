@@ -1,0 +1,350 @@
+/* ---------- Gestión de Usuarios ---------- */
+.usr-toolbar {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgb(57 66 63 / 0.15);
+    padding: 14px 20px;
+    margin-bottom: 22px;
+}
+
+.usr-toolbar-form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #F7F9FB;
+    border: 1px solid #e3efec;
+    border-radius: 10px;
+    padding: 10px 14px;
+    max-width: 360px;
+}
+
+.usr-toolbar-icon {
+    color: #9ba8a8;
+    flex-shrink: 0;
+}
+
+.usr-toolbar-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 14px;
+    color: #0f1717;
+    width: 100%;
+}
+
+.usr-toolbar-input::placeholder {
+    color: #9ba8a8;
+}
+
+.usr-panel {
+    padding: 0;
+    overflow: hidden;
+}
+
+.usr-panel .table thead tr {
+    background: #EEF2F6;
+}
+
+.usr-panel .table th {
+    padding: 14px 16px;
+}
+.usr-panel tbody td {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.usr-panel tbody tr:hover td{
+    background-color: #ececec;
+}
+
+.usr-panel .table th:first-child,
+.usr-panel .table td:first-child {
+    padding-left: 28px;
+}
+
+.usr-panel .table th:last-child,
+.usr-panel .table td:last-child {
+    padding-right: 28px;
+}
+
+.usr-panel .table td {
+    padding: 16px 16px;
+    font-size: 14px;
+    color: #2d3a3a;
+    border-bottom: 1px solid #eef3f1;
+}
+
+.usr-panel .table tbody tr:hover {
+    background: #f8fcfb;
+}
+
+.usr-panel-footer {
+    padding: 18px 28px 26px;
+}
+
+.usr-cell-user {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.usr-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.usr-avatar-0 { background: #2bb3a3; }
+.usr-avatar-1 { background: #4f6bd1; }
+.usr-avatar-2 { background: #7b4caf; }
+.usr-avatar-3 { background: #c08a16; }
+
+.usr-row-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #0f1717;
+}
+
+.usr-row-sub {
+    font-size: 12px;
+    color: #6b8a86;
+    margin-top: 2px;
+}
+
+.usr-role-badge {
+    display: inline-flex;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #eef3f1;
+    color: #4a5959;
+}
+
+.usr-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.usr-badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+
+.usr-badge-activo {
+    background: #d8f4e2;
+    color: #2a9d56;
+}
+
+.usr-badge-inactivo {
+    background: #fde2e2;
+    color: #c0392b;
+}
+
+.usr-table-footer {
+    margin-top: 18px;
+    font-size: 13px;
+    color: #6b8a86;
+}
+
+/* ---------- Formulario de Usuario ---------- */
+.usr-form-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 22px;
+    margin-bottom: 22px;
+    border-bottom: 1px solid #eef3f1;
+}
+
+.usr-form-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f1717;
+}
+
+.usr-form-header p {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #6b8a86;
+}
+
+.usr-form-header-icon {
+    color: #cfd8d6;
+}
+
+.usr-form {
+    display: block;
+}
+
+.usr-form-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 28px 0 18px;
+}
+
+.usr-form-section:first-of-type {
+    margin-top: 0;
+}
+
+.usr-form-section-bar {
+    width: 4px;
+    height: 14px;
+    background: #2bb3a3;
+    border-radius: 2px;
+}
+
+.usr-form-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #2bb3a3;
+}
+
+.usr-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+}
+
+.usr-form-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.usr-form-field .login-label {
+    margin-top: 0;
+}
+
+.usr-password-wrap {
+    position: relative;
+    display: flex;
+}
+
+.usr-password-wrap .login-input {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.usr-password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ba8a8;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.usr-password-toggle-active {
+    color: #2bb3a3;
+}
+
+.usr-estado-toggle {
+    display: flex;
+    gap: 16px;
+}
+
+.usr-estado-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border: 1px solid #cfd8d6;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b8a86;
+    cursor: pointer;
+    position: relative;
+}
+
+.usr-estado-option input {
+    position: absolute;
+    opacity: 0;
+}
+
+.usr-estado-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 2px solid #cfd8d6;
+    flex-shrink: 0;
+}
+
+.usr-estado-check {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #2a9d56;
+    color: #ffffff;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.usr-estado-option:has(input:checked) {
+    background: #e9f7ef;
+    border-color: #2a9d56;
+    color: #1f7a40;
+}
+
+.usr-estado-option:has(input:checked) .usr-estado-dot {
+    background: #2a9d56;
+    border-color: #2a9d56;
+}
+
+.usr-estado-option:has(input:checked) .usr-estado-check {
+    display: flex;
+}
+
+.usr-form-footer {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #eef3f1;
+}
+
+.usr-form-footer .form-cancel {
+    margin-top: 0;
+    text-align: left;
+}
+
+.usr-form-hint {
+    margin-left: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: #9ba8a8;
+}
+
+@media (max-width: 720px) {
+    .usr-form-grid { grid-template-columns: 1fr; }
+    .usr-estado-toggle { flex-direction: column; }
+}
+

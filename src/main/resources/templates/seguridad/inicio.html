@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Vision - Seguridad</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/security.css}">
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="brand">
+        <h1>Geo Vision</h1>
+        <p>Sistema de Ventas</p>
+    </div>
+
+    <nav class="nav">
+        <a th:href="@{/dashboard}">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                </span>
+            Inicio
+        </a>
+        <a th:href="@{/pacientes}" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+            Atencion al Paciente
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_VENTAS')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+                </span>
+            Ventas
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_LABORATORIO')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M9 2h6v4H9z"/><path d="M12 6v8"/><circle cx="12" cy="18" r="4"/></svg>
+                </span>
+            Laboratorio
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_INVENTARIO')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </span>
+            Inventario
+        </a>
+        <span class="nav-section-label" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">Seguridad</span>
+        <a th:href="@{/seguridad}" class="active" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </span>
+            Seguridad
+        </a>
+        <a th:href="@{/usuarios}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+                </span>
+            Gestión de Usuarios
+        </a>
+        <a th:href="@{/roles}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                </span>
+            Roles y Permisos
+        </a>
+    </nav>
+
+    <div class="user-card">
+        <div class="avatar"></div>
+        <div>
+            <div class="name" sec:authentication="principal.usuario.empleado.persona.nombres">Nombre</div>
+            <div class="role" sec:authentication="principal.usuario.rol.nombreRol">Rol</div>
+        </div>
+    </div>
+
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit" class="logout-btn">Cerrar sesión</button>
+    </form>
+</aside>
+
+<!-- Main -->
+<main class="main">
+    <div class="topbar">
+        <h2>Seguridad</h2>
+        <div class="divider"></div>
+        <span class="date" th:text="${fechaHoy}">Fecha de hoy</span>
+        <div class="actions">
+            <div class="seg-topbar-profile">
+                <div class="seg-avatar"
+                     th:text="${#strings.substring(#authentication.principal.usuario.empleado.persona.nombres,0,1)} + ${#strings.substring(#authentication.principal.usuario.empleado.persona.apellidos,0,1)}">LE</div>
+                <div>
+                    <div class="seg-topbar-name"
+                         th:text="${#authentication.principal.usuario.empleado.persona.nombres} + ' ' + ${#authentication.principal.usuario.empleado.persona.apellidos}">Nombre Apellido</div>
+                    <div class="seg-topbar-role" sec:authentication="principal.usuario.rol.nombreRol">Rol</div>
+                </div>
+            </div>
+            <form th:action="@{/logout}" method="post" class="seg-logout-form">
+                <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                <button type="submit" class="seg-logout-btn">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+                    Cerrar sesión
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="content">
+        <section class="seg-banner">
+            <div class="seg-banner-avatar"
+                 th:text="${#strings.substring(#authentication.principal.usuario.empleado.persona.nombres,0,1)} + ${#strings.substring(#authentication.principal.usuario.empleado.persona.apellidos,0,1)}">LE</div>
+            <div class="seg-banner-text">
+                <h3 th:text="'Hola, ' + ${#authentication.principal.usuario.empleado.persona.nombres} + ' ' + ${#authentication.principal.usuario.empleado.persona.apellidos}">Hola, Nombre</h3>
+                <p th:text="'Tienes acceso a ' + ${totalModulosUsuario} + ' módulo(s) según tu rol.'">Tienes acceso a N módulo(s) según tu rol.</p>
+            </div>
+            <span class="seg-role-badge" sec:authentication="principal.usuario.rol.nombreRol">Rol</span>
+        </section>
+
+        <h4 class="seg-section-title">Módulos habilitados para tu rol</h4>
+        <section  class="seg-modules-grid">
+            <div  class="seg-module-card" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+                <div class="top">
+                    <div class="stat-icon blue">
+                        <svg class="feather" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Atención al Paciente</div>
+                <div class="seg-module-desc">Registro y atención clínica de pacientes.</div>
+            </div>
+
+            <div class="seg-module-card" sec:authorize="hasAuthority('MODULO_VENTAS')">
+                <div class="top">
+                    <div class="stat-icon blue">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Ventas</div>
+                <div class="seg-module-desc">Registro de ventas, pagos e historial.</div>
+            </div>
+
+            <div class="seg-module-card" sec:authorize="hasAuthority('MODULO_LABORATORIO')">
+                <div class="top">
+                    <div class="stat-icon purple">
+                        <svg class="feather" viewBox="0 0 24 24"><path d="M9 2h6v4H9z"/><path d="M12 6v8"/><circle cx="12" cy="18" r="4"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Laboratorio</div>
+                <div class="seg-module-desc">Órdenes de trabajo y control de calidad.</div>
+            </div>
+
+            <div class="seg-module-card" sec:authorize="hasAuthority('MODULO_INVENTARIO')">
+                <div class="top">
+                    <div class="stat-icon amber">
+                        <svg class="feather" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Inventario</div>
+                <div class="seg-module-desc">Compras y abastecimiento de stock.</div>
+            </div>
+
+            <div class="seg-module-card" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+                <div class="top">
+                    <div class="stat-icon green">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Seguridad</div>
+                <div class="seg-module-desc">Usuarios, roles y permisos del sistema.</div>
+            </div>
+
+            <div class="seg-module-card" sec:authorize="hasAuthority('MODULO_CONFIGURACION')">
+                <div class="top">
+                    <div class="stat-icon purple">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Configuración</div>
+                <div class="seg-module-desc">Parámetros generales del sistema.</div>
+            </div>
+        </section>
+
+        <section class="seg-actions-grid">
+            <div class="seg-module-card seg-action-card">
+                <div class="top">
+                    <div class="stat-icon blue">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Gestión de Usuarios</div>
+                <div class="seg-module-desc">Registrar, editar y activar/desactivar las cuentas de acceso al sistema.</div>
+                <a th:href="@{/usuarios}" class="new-sale-btn seg-action-btn">Ir a Gestión de Usuarios</a>
+            </div>
+
+            <div class="seg-module-card seg-action-card">
+                <div class="top">
+                    <div class="stat-icon green">
+                        <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <span class="seg-chevron">&rsaquo;</span>
+                </div>
+                <div class="seg-module-title">Roles y Permisos</div>
+                <div class="seg-module-desc">Definir roles y asignar los módulos a los que cada rol tiene acceso.</div>
+                <a th:href="@{/roles}" class="new-sale-btn seg-action-btn">Ir a Roles y Permisos</a>
+            </div>
+        </section>
+    </div>
+</main>
+</body>
+</html>
