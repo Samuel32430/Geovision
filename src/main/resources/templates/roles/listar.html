@@ -93,12 +93,15 @@
     </div>
 
     <div class="content">
-        <div class="panel rol-panel">
-            <form method="get" th:action="@{/roles}" class="list-filter">
-                <input class="login-input" type="text" name="q" th:value="${q}" placeholder="Buscar por nombre de rol...">
+        <div class="rol-toolbar">
+            <form method="get" th:action="@{/roles}" class="rol-toolbar-form">
+                <svg class="feather rol-toolbar-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="rol-toolbar-input" type="text" name="q" th:value="${q}" placeholder="Buscar por nombre de rol...">
             </form>
+        </div>
 
-            <table class="table">
+        <div class="panel rol-panel">
+            <table class="table rol-table">
                 <thead>
                 <tr>
                     <th>Rol</th>
@@ -123,7 +126,7 @@
                             <a class="rol-edit-link" th:href="@{/roles/{id}/editar(id=${rol.id})}">Editar</a>
                             <form th:action="@{/roles/{id}/estado(id=${rol.id})}" method="post" class="inline-form">
                                 <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                                <button type="submit" class="rol-toggle-btn" th:text="${rol.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
+                                <button type="submit" class="rol-toggle-btn btn-desactivar" th:text="${rol.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
                             </form>
                         </div>
                     </td>
