@@ -127,6 +127,10 @@
                         <label class="login-label" for="correo">Correo</label>
                         <input class="login-input" type="email" id="correo" th:field="*{empleado.persona.correo}" placeholder="usuario@geovision.com" required>
                     </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="dni">Documento de indentidad</label>
+                        <input class="login-input" type="text" id="dni" th:field="*{empleado.persona.dni}" placeholder="00000000" minlength="3" required>
+                    </div>
                 </div>
 
                 <div class="usr-form-section">
