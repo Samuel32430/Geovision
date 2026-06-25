@@ -114,6 +114,9 @@
 .rol-panel tbody tr:hover td{
     background-color: #ececec;
 }
+.rol-panel thead{
+    background: #EEF2F6;
+}
 
 .rol-permiso-card-body {
     position: relative;

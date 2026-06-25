@@ -10,9 +10,13 @@ import java.util.Optional;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     Optional<Usuario> findByUsuarioLogin(String usuarioLogin);
 
-    /*Page<Usuario> findByUsuarioLoginContainingIgnoreCaseOrRol_NombreRolContainingIgnoreCase(
+    boolean existsByUsuarioLogin(String usuarioLogin);
+
+    boolean existsByUsuarioLoginAndIdNot(String usuarioLogin, Long id);
+
+    Page<Usuario> findByUsuarioLoginContainingIgnoreCaseOrRol_NombreRolContainingIgnoreCase(
             String usuario,
             String rol,
             Pageable pageable
-    );*/
+    );
 }

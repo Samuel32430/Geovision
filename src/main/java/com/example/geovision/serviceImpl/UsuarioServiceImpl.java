@@ -43,15 +43,25 @@ public class UsuarioServiceImpl implements UsuarioService {
         return usuarioRepository.findAll();
     }
 
-    /*@Override
+    @Override
     public Page<Usuario> findPage(String busqueda, Pageable pageable) {
-        if(busqueda == null || busqueda.isBlank()){
+        if (busqueda == null || busqueda.isBlank()) {
             return usuarioRepository.findAll(pageable);
         }
-        return  usuarioRepository.findByUsuarioLoginContainingIgnoreCaseOrRol_NombreRolContainingIgnoreCase(
+        return usuarioRepository.findByUsuarioLoginContainingIgnoreCaseOrRol_NombreRolContainingIgnoreCase(
                 busqueda,
                 busqueda,
                 pageable
         );
-    }*/
+    }
+
+    @Override
+    public boolean existsByUsuarioLogin(String usuarioLogin) {
+        return usuarioRepository.existsByUsuarioLogin(usuarioLogin);
+    }
+
+    @Override
+    public boolean existsByUsuarioLoginAndIdNot(String usuarioLogin, Long id) {
+        return usuarioRepository.existsByUsuarioLoginAndIdNot(usuarioLogin, id);
+    }
 }

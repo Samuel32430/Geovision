@@ -2,13 +2,17 @@ package com.example.geovision.controller;
 
 import com.example.geovision.models.Empleado;
 import com.example.geovision.models.Persona;
-import com.example.geovision.models.Rol;
+
 import com.example.geovision.models.Usuario;
 import com.example.geovision.service.EmpleadoService;
 import com.example.geovision.service.PersonaService;
 import com.example.geovision.service.RolService;
 import com.example.geovision.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,8 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.StreamSupport;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 @Controller
 @RequiredArgsConstructor
@@ -33,19 +40,41 @@ public class UsuarioController {
     private final RolService rolService;
     private final PasswordEncoder passwordEncoder;
 
+    private static final int USUARIOS_POR_PAGINA = 8;
+
     @GetMapping("/usuarios")
-    public String listar(@RequestParam(name = "q", required = false) String q, Model model) {
-        List<Usuario> usuarios = StreamSupport.stream(usuarioService.findAll().spliterator(), false).toList();
-        if (StringUtils.hasText(q)) {
-            String texto = q.toLowerCase();
-            usuarios = usuarios.stream()
-                    .filter(usuario -> usuario.getUsuarioLogin().toLowerCase().contains(texto)
-                            || usuario.getRol().getNombreRol().toLowerCase().contains(texto))
-                    .toList();
-        }
+    public String listar(@RequestParam(name = "q", required = false) String q, @RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+        Pageable pageable = PageRequest.of(max(0, page), USUARIOS_POR_PAGINA, Sort.by("id").ascending());
+        Page<Usuario> usuarios = usuarioService.findPage(q, pageable);
+
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("q", q);
+        model.addAttribute("paginas", construirPaginas(usuarios.getTotalPages(), usuarios.getNumber()));
         return "usuarios/listar";
+    }
+
+    private List<Integer> construirPaginas(int totalPages, int actual) {
+        List<Integer> paginas = new ArrayList<>();
+        if (totalPages <= 1) {
+            paginas.add(0);
+            return paginas;
+        }
+
+        int desde = max(1, actual - 1);
+        int hasta = min(totalPages - 2, actual + 1);
+
+        paginas.add(0);
+        if (desde > 1) {
+            paginas.add(null);
+        }
+        for (int i = desde; i <= hasta; i++) {
+            paginas.add(i);
+        }
+        if (hasta < totalPages - 2) {
+            paginas.add(null);
+        }
+        paginas.add(totalPages - 1);
+        return paginas;
     }
 
     @GetMapping("/usuarios/nuevo")
@@ -68,13 +97,32 @@ public class UsuarioController {
 
     @PostMapping("/usuarios")
     public String crear(@ModelAttribute Usuario datosFormulario, @RequestParam Long idRol,
-                         @RequestParam String contrasenaInicial) {
-        LocalDate hoy = LocalDate.now();
-
+                         @RequestParam String contrasenaInicial, Model model) {
         Persona persona = datosFormulario.getEmpleado().getPersona();
+
+        List<String> camposConError = new ArrayList<>();
+        List<String> mensajes = new ArrayList<>();
+        if (usuarioService.existsByUsuarioLogin(datosFormulario.getUsuarioLogin())) {
+            camposConError.add("usuarioLogin");
+            mensajes.add("nombre de usuario");
+        }
+        if (StringUtils.hasText(persona.getDni()) && personaService.existsByDni(persona.getDni())) {
+            camposConError.add("dni");
+            mensajes.add("documento de identidad (DNI)");
+        }
+
+        if (!camposConError.isEmpty()) {
+            datosFormulario.setRol(rolService.findById(idRol));
+            model.addAttribute("usuario", datosFormulario);
+            model.addAttribute("roles", rolService.findAll());
+            model.addAttribute("errorRegistro", "Ya existe una cuenta registrada con ese " + String.join(" y ese ", mensajes) + ".");
+            model.addAttribute("camposConError", camposConError);
+            return "usuarios/formulario";
+        }
+
+        LocalDate hoy = LocalDate.now();
         persona.setTipoPersona("empleado");
         persona.setFechaRegistro(hoy);
-        persona.setDni(persona.getDni());
         persona = personaService.save(persona);
 
         Empleado empleado = datosFormulario.getEmpleado();
@@ -96,7 +144,18 @@ public class UsuarioController {
     @PostMapping("/usuarios/{id}")
     public String actualizar(@PathVariable Long id, @ModelAttribute Usuario datosFormulario,
                               @RequestParam Long idRol,
-                              @RequestParam(name = "nuevaContrasena", required = false) String nuevaContrasena) {
+                              @RequestParam(name = "nuevaContrasena", required = false) String nuevaContrasena,
+                              Model model) {
+        if (usuarioService.existsByUsuarioLoginAndIdNot(datosFormulario.getUsuarioLogin(), id)) {
+            datosFormulario.setId(id);
+            datosFormulario.setRol(rolService.findById(idRol));
+            model.addAttribute("usuario", datosFormulario);
+            model.addAttribute("roles", rolService.findAll());
+            model.addAttribute("errorRegistro", "Ya existe una cuenta registrada con ese nombre de usuario.");
+            model.addAttribute("camposConError", List.of("usuarioLogin"));
+            return "usuarios/formulario";
+        }
+
         Usuario usuario = usuarioService.findById(id);
 
         Persona persona = usuario.getEmpleado().getPersona();
@@ -130,8 +189,6 @@ public class UsuarioController {
         usuarioService.save(usuario);
         return "redirect:/usuarios";
     }
-
-
-    /// fetch
+    
     
 }

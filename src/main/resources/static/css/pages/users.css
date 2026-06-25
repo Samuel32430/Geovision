@@ -78,7 +78,61 @@
 }
 
 .usr-panel-footer {
-    padding: 18px 28px 26px;
+    background: #EEF2F6;
+    padding: 12px 18px 18px 18px;
+}
+
+.usr-panel-footer-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.usr-pagination {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.usr-page-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #4a5959;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+.usr-page-btn:hover {
+    background: #f1faf8;
+}
+
+.usr-page-active,
+.usr-page-active:hover {
+    background: #2bb3a3;
+    color: #ffffff;
+}
+
+.usr-page-arrow {
+    color: #9ba8a8;
+}
+
+.usr-page-disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+.usr-page-ellipsis {
+    color: #9ba8a8;
+    padding: 0 4px;
+    font-weight: 700;
 }
 
 .usr-cell-user {
@@ -163,6 +217,44 @@
 }
 
 /* ---------- Formulario de Usuario ---------- */
+.usr-form-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #fde2e2;
+    border: 1px solid #f7b8b8;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+}
+
+.usr-form-alert-icon {
+    color: #c0392b;
+    flex-shrink: 0;
+}
+
+.usr-form-alert-title {
+    font-weight: 700;
+    font-size: 14px;
+    color: #c0392b;
+}
+
+.usr-form-alert-text {
+    margin-top: 2px;
+    font-size: 13px;
+    color: #9f3030;
+}
+
+.usr-input-error {
+    border-color: #e57373 !important;
+}
+
+.usr-field-error {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #c0392b;
+}
+
 .usr-form-header {
     display: flex;
     align-items: flex-start;

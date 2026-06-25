@@ -152,9 +152,31 @@
                 </tbody>
             </table>
             <div class="usr-panel-footer">
-                <div class="empty" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</div>
-                <div class="usr-table-footer" th:unless="${#lists.isEmpty(usuarios)}"
-                     th:text="'Mostrando ' + ${usuarios.size()} + ' usuario' + (${usuarios.size()} == 1 ? '' : 's')"></div>
+                <div class="empty" th:if="${usuarios.empty}">No hay usuarios registrados</div>
+                <div class="usr-panel-footer-row" th:unless="${usuarios.empty}">
+                    <div class="usr-table-footer"
+                         th:text="'Mostrando ' + ${usuarios.numberOfElements} + ' de ' + ${usuarios.totalElements} + ' usuario' + (${usuarios.totalElements} == 1 ? '' : 's')"></div>
+
+                    <div class="usr-pagination" th:if="${usuarios.totalPages > 1}">
+                        <a class="usr-page-btn usr-page-arrow" th:classappend="${usuarios.first} ? 'usr-page-disabled'"
+                           th:href="${usuarios.first} ? '#' : @{/usuarios(q=${q}, page=${usuarios.number - 1})}">
+                            <svg class="feather" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+                        </a>
+
+                        <th:block th:each="p : ${paginas}">
+                            <span th:if="${p == null}" class="usr-page-ellipsis">&hellip;</span>
+                            <a th:unless="${p == null}" class="usr-page-btn"
+                               th:classappend="${p == usuarios.number} ? 'usr-page-active'"
+                               th:href="@{/usuarios(q=${q}, page=${p})}"
+                               th:text="${p + 1}"></a>
+                        </th:block>
+
+                        <a class="usr-page-btn usr-page-arrow" th:classappend="${usuarios.last} ? 'usr-page-disabled'"
+                           th:href="${usuarios.last} ? '#' : @{/usuarios(q=${q}, page=${usuarios.number + 1})}">
+                            <svg class="feather" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

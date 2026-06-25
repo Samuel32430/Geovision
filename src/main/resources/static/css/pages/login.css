@@ -60,3 +60,16 @@
     display: flex;
     gap: 16px;
 }
+.login-text {
+    font-size: 13px;
+    color: #2d3a3a;
+    margin-top: 16px;
+    margin-bottom: 6px;
+}
+
+.recupera-contrasena{
+    color: #2bb3a3;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}

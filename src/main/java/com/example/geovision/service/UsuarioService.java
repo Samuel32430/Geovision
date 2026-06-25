@@ -6,5 +6,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 public interface UsuarioService extends CrudService<Usuario, Long> {
-    //Page<Usuario> findPage(String busqueda, Pageable pageable);
+    Page<Usuario> findPage(String busqueda, Pageable pageable);
+
+    boolean existsByUsuarioLogin(String usuarioLogin);
+
+    boolean existsByUsuarioLoginAndIdNot(String usuarioLogin, Long id);
 }
