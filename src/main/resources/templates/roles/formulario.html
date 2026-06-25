@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Vision - Rol</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/roles.css}">
 </head>
 <body>
 <!-- Sidebar -->
@@ -107,18 +108,34 @@
                     <option value="inactivo">Inactivo</option>
                 </select>
 
-                <label class="login-label">Módulos permitidos</label>
-                <div th:each="permiso : ${permisos}" style="display:flex; align-items:center; gap:8px; padding:6px 0;">
-                    <input type="checkbox" name="idsPermiso" th:value="${permiso.id}" th:id="${'permiso-' + permiso.id}"
-                           th:checked="${idsPermisoAsignados.contains(permiso.id)}">
-                    <label th:for="${'permiso-' + permiso.id}" th:text="${permiso.modulo.nombreModulo}"></label>
+                <div class="rol-permisos-header">
+                    <label class="login-label form-section-label">Módulos permitidos</label>
+                    <span class="rol-selected-count" id="rolSelectedCount"
+                          th:text="${idsPermisoAsignados.size()} + ' seleccionados'"></span>
+                </div>
+                <div class="rol-permisos-grid">
+                    <label class="rol-permiso-card" th:each="permiso : ${permisos}">
+                        <input type="checkbox" name="idsPermiso" th:value="${permiso.id}"
+                               th:checked="${idsPermisoAsignados.contains(permiso.id)}"
+                               onchange="actualizarContadorPermisos()">
+                        <span class="rol-permiso-card-body">
+                            <span class="rol-permiso-title" th:text="${permiso.modulo.nombreModulo}"></span>
+                            <span class="rol-permiso-check">✓</span>
+                        </span>
+                    </label>
                 </div>
 
                 <button type="submit" class="new-sale-btn login-submit">Guardar</button>
-                <a th:href="@{/roles}" style="margin-top:10px; text-align:center; color:#6b8a86;">Cancelar</a>
+                <a th:href="@{/roles}" class="form-cancel">Cancelar</a>
             </form>
         </div>
     </div>
 </main>
+<script>
+    function actualizarContadorPermisos() {
+        const total = document.querySelectorAll('.rol-permiso-card input:checked').length;
+        document.getElementById('rolSelectedCount').textContent = total + ' seleccionados';
+    }
+</script>
 </body>
 </html>

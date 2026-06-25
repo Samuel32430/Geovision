@@ -118,7 +118,7 @@
                     <td>
                         <a th:href="@{/pacientes/{id}/editar(id=${paciente.id})}">Editar</a>
                         &nbsp;
-                        <form th:action="@{/pacientes/{id}/estado(id=${paciente.id})}" method="post" style="display:inline">
+                        <form th:action="@{/pacientes/{id}/estado(id=${paciente.id})}" method="post" class="inline-form">
                             <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
                             <button type="submit" th:text="${paciente.estado == 'activo'} ? 'Dar de baja' : 'Reactivar'"></button>
                         </form>

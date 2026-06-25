@@ -129,4 +129,8 @@ public class UsuarioController {
         usuarioService.save(usuario);
         return "redirect:/usuarios";
     }
+
+
+    /// fetch
+    
 }

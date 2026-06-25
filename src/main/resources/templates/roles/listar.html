@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Vision - Roles y Permisos</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/roles.css}">
 </head>
 <body>
 <!-- Sidebar -->
@@ -92,8 +93,8 @@
     </div>
 
     <div class="content">
-        <div class="panel">
-            <form method="get" th:action="@{/roles}" style="margin-bottom:20px;">
+        <div class="panel rol-panel">
+            <form method="get" th:action="@{/roles}" class="list-filter">
                 <input class="login-input" type="text" name="q" th:value="${q}" placeholder="Buscar por nombre de rol...">
             </form>
 
@@ -112,14 +113,19 @@
                     <td th:text="${rol.nombreRol}"></td>
                     <td th:text="${rol.descripcion}"></td>
                     <td th:text="${#strings.listJoin(permisosPorRol.get(rol.id), ', ')}"></td>
-                    <td th:text="${rol.estado}"></td>
                     <td>
-                        <a th:href="@{/roles/{id}/editar(id=${rol.id})}">Editar</a>
-                        &nbsp;
-                        <form th:action="@{/roles/{id}/estado(id=${rol.id})}" method="post" style="display:inline">
-                            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                            <button type="submit" th:text="${rol.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
-                        </form>
+                        <span class="rol-badge"
+                              th:class="${rol.estado == 'activo'} ? 'rol-badge rol-badge-activo' : 'rol-badge rol-badge-inactivo'"
+                              th:text="${rol.estado}"></span>
+                    </td>
+                    <td>
+                        <div class="rol-table-actions">
+                            <a class="rol-edit-link" th:href="@{/roles/{id}/editar(id=${rol.id})}">Editar</a>
+                            <form th:action="@{/roles/{id}/estado(id=${rol.id})}" method="post" class="inline-form">
+                                <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <button type="submit" class="rol-toggle-btn" th:text="${rol.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 </tbody>

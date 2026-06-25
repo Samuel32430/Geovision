@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Vision - Gestión de Usuarios</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/users.css}">
+    <link rel="stylesheet" href="../../static/css/components/buttons.css">
 </head>
 <body>
 <!-- Sidebar -->
@@ -87,17 +89,23 @@
         <div class="divider"></div>
         <span class="date">Módulo de Seguridad</span>
         <div class="actions">
-            <a th:href="@{/usuarios/nuevo}" class="new-sale-btn">+ Registrar usuario</a>
+            <a th:href="@{/usuarios/nuevo}">
+                <button class="new-sale-btn">+ Registrar usuario</button>
+            </a>
+            <!--<a th:href="@{/usuarios/nuevo}" class="new-sale-btn">+ Registrar usuario</a>-->
         </div>
     </div>
 
     <div class="content">
-        <div class="panel">
-            <form method="get" th:action="@{/usuarios}" style="margin-bottom:20px;">
-                <input class="login-input" type="text" name="q" th:value="${q}" placeholder="Buscar por usuario o rol...">
+        <div class="usr-toolbar">
+            <form method="get" th:action="@{/usuarios}" class="usr-toolbar-form">
+                <svg class="feather usr-toolbar-icon" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input class="usr-toolbar-input" type="text" name="q" th:value="${q}" placeholder="Buscar por usuario o rol...">
             </form>
+        </div>
 
-            <table class="table">
+        <div class="panel usr-panel">
+            <table class="table usr-table">
                 <thead>
                 <tr>
                     <th>Usuario</th>
@@ -109,24 +117,45 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="usuario : ${usuarios}">
-                    <td th:text="${usuario.usuarioLogin}"></td>
-                    <td th:text="${usuario.empleado.persona.correo}"></td>
-                    <td th:text="${usuario.rol.nombreRol}"></td>
-                    <td th:text="${usuario.fechaRegistro}"></td>
-                    <td th:text="${usuario.estado}"></td>
+                <tr th:each="usuario, iter : ${usuarios}">
                     <td>
-                        <a th:href="@{/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
-                        &nbsp;
-                        <form th:action="@{/usuarios/{id}/estado(id=${usuario.id})}" method="post" style="display:inline">
-                            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-                            <button type="submit" th:text="${usuario.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
-                        </form>
+                        <div class="usr-cell-user">
+                            <div class="usr-avatar" th:classappend="'usr-avatar-' + ${iter.index % 4}"
+                                 th:text="${#strings.substring(usuario.empleado.persona.nombres,0,1)} + ${#strings.substring(usuario.empleado.persona.apellidos,0,1)}"></div>
+                            <div>
+                                <div class="usr-row-name"
+                                     th:text="${usuario.empleado.persona.nombres} + ' ' + ${usuario.empleado.persona.apellidos}"></div>
+                                <div class="usr-row-sub" th:text="'@' + ${usuario.usuarioLogin}"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td th:text="${usuario.empleado.persona.correo}"></td>
+                    <td><span class="usr-role-badge" th:text="${usuario.rol.nombreRol}"></span></td>
+                    <td th:text="${#temporals.format(usuario.fechaRegistro, 'dd/MM/yyyy')}"></td>
+                    <td>
+                        <span class="usr-badge"
+                              th:class="${usuario.estado == 'activo'} ? 'usr-badge usr-badge-activo' : 'usr-badge usr-badge-inactivo'">
+                            <span class="usr-badge-dot"></span>
+                            <span th:text="${usuario.estado}"></span>
+                        </span>
+                    </td>
+                    <td>
+                        <div class="rol-table-actions">
+                            <a class="rol-edit-link" th:href="@{/usuarios/{id}/editar(id=${usuario.id})}">Editar</a>
+                            <form th:action="@{/usuarios/{id}/estado(id=${usuario.id})}" method="post" class="inline-form">
+                                <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                                <button type="submit" class="rol-toggle-btn" th:text="${usuario.estado == 'activo'} ? 'Desactivar' : 'Activar'"></button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
-            <div class="empty" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</div>
+            <div class="usr-panel-footer">
+                <div class="empty" th:if="${#lists.isEmpty(usuarios)}">No hay usuarios registrados</div>
+                <div class="usr-table-footer" th:unless="${#lists.isEmpty(usuarios)}"
+                     th:text="'Mostrando ' + ${usuarios.size()} + ' usuario' + (${usuarios.size()} == 1 ? '' : 's')"></div>
+            </div>
         </div>
     </div>
 </main>

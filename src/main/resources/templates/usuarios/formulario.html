@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geo Vision - Usuario</title>
     <link rel="stylesheet" th:href="@{/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/pages/users.css}">
 </head>
 <body>
 <!-- Sidebar -->
@@ -89,61 +90,129 @@
     </div>
 
     <div class="content">
-        <div class="panel">
+        <div class="panel usr-form-panel">
+            <div class="usr-form-header">
+                <div>
+                    <h3 th:text="${usuario.id == null} ? 'Nuevo Usuario' : 'Editar Usuario'"></h3>
+                    <p th:text="${usuario.id == null} ? 'Complete la información para registrar una nueva cuenta en el sistema.' : 'Actualice la información de la cuenta.'"></p>
+                </div>
+                <span class="usr-form-header-icon">
+                    <svg class="feather lg" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="17" y1="11" x2="23" y2="11"/></svg>
+                </span>
+            </div>
+
             <form th:object="${usuario}"
                   th:action="${usuario.id == null} ? @{/usuarios} : @{/usuarios/{id}(id=${usuario.id})}"
-                  method="post" class="login-form">
+                  method="post" class="usr-form">
                 <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-                <label class="login-label" for="usuarioLogin">Nombre de usuario</label>
-                <input class="login-input" type="text" id="usuarioLogin" th:field="*{usuarioLogin}" required>
+                <div class="usr-form-section">
+                    <span class="usr-form-section-bar"></span>
+                    <span class="usr-form-section-title">Información personal</span>
+                </div>
+                <div class="usr-form-grid">
+                    <div class="usr-form-field">
+                        <label class="login-label" for="nombres">Nombres</label>
+                        <input class="login-input" type="text" id="nombres" th:field="*{empleado.persona.nombres}" placeholder="Ingrese nombres" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="apellidos">Apellidos</label>
+                        <input class="login-input" type="text" id="apellidos" th:field="*{empleado.persona.apellidos}" placeholder="Ingrese apellidos" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="telefono">Teléfono</label>
+                        <input class="login-input" type="text" id="telefono" th:field="*{empleado.persona.telefono}" placeholder="+51 900 000 000" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="correo">Correo</label>
+                        <input class="login-input" type="email" id="correo" th:field="*{empleado.persona.correo}" placeholder="usuario@geovision.com" required>
+                    </div>
+                </div>
 
-                <label class="login-label" for="nombres">Nombres</label>
-                <input class="login-input" type="text" id="nombres" th:field="*{empleado.persona.nombres}" required>
+                <div class="usr-form-section">
+                    <span class="usr-form-section-bar"></span>
+                    <span class="usr-form-section-title">Configuración de cuenta</span>
+                </div>
+                <div class="usr-form-grid">
+                    <div class="usr-form-field">
+                        <label class="login-label" for="usuarioLogin">Nombre de usuario</label>
+                        <input class="login-input" type="text" id="usuarioLogin" th:field="*{usuarioLogin}" placeholder="j.perez" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="cargo">Cargo</label>
+                        <input class="login-input" type="text" id="cargo" th:field="*{empleado.cargo}" placeholder="Ej. Analista de Ventas" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="fechaIngreso">Fecha de ingreso</label>
+                        <input class="login-input" type="date" id="fechaIngreso" th:field="*{empleado.fechaIngreso}" required>
+                    </div>
+                    <div class="usr-form-field">
+                        <th:block th:if="${usuario.id == null}">
+                            <label class="login-label" for="contrasenaInicial">Contraseña inicial</label>
+                            <div class="usr-password-wrap">
+                                <input class="login-input" type="password" id="contrasenaInicial" name="contrasenaInicial" minlength="6" required>
+                                <button type="button" class="usr-password-toggle" onclick="toggleUsrPassword('contrasenaInicial', this)">
+                                    <svg class="feather" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                            </div>
+                        </th:block>
+                        <th:block th:unless="${usuario.id == null}">
+                            <label class="login-label" for="nuevaContrasena">Nueva contraseña (opcional)</label>
+                            <div class="usr-password-wrap">
+                                <input class="login-input" type="password" id="nuevaContrasena" name="nuevaContrasena" minlength="6" placeholder="Mínimo 6 caracteres">
+                                <button type="button" class="usr-password-toggle" onclick="toggleUsrPassword('nuevaContrasena', this)">
+                                    <svg class="feather" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                            </div>
+                        </th:block>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label" for="idRol">Rol</label>
+                        <select class="login-input" id="idRol" name="idRol" required>
+                            <option value="">Seleccione un rol</option>
+                            <option th:each="rol : ${roles}" th:value="${rol.id}"
+                                    th:selected="${usuario.rol != null and usuario.rol.id == rol.id}"
+                                    th:text="${rol.nombreRol}"></option>
+                        </select>
+                    </div>
+                    <div class="usr-form-field">
+                        <label class="login-label">Estado</label>
+                        <div class="usr-estado-toggle">
+                            <label class="usr-estado-option">
+                                <input type="radio" th:field="*{estado}" value="activo">
+                                <span class="usr-estado-dot"></span> Activo
+                                <span class="usr-estado-check">✓</span>
+                            </label>
+                            <label class="usr-estado-option">
+                                <input type="radio" th:field="*{estado}" value="inactivo">
+                                <span class="usr-estado-dot"></span> Inactivo
+                                <span class="usr-estado-check">✓</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
 
-                <label class="login-label" for="apellidos">Apellidos</label>
-                <input class="login-input" type="text" id="apellidos" th:field="*{empleado.persona.apellidos}" required>
-
-                <label class="login-label" for="telefono">Teléfono</label>
-                <input class="login-input" type="text" id="telefono" th:field="*{empleado.persona.telefono}" required>
-
-                <label class="login-label" for="correo">Correo</label>
-                <input class="login-input" type="email" id="correo" th:field="*{empleado.persona.correo}" required>
-
-                <label class="login-label" for="cargo">Cargo</label>
-                <input class="login-input" type="text" id="cargo" th:field="*{empleado.cargo}" required>
-
-                <label class="login-label" for="fechaIngreso">Fecha de ingreso</label>
-                <input class="login-input" type="date" id="fechaIngreso" th:field="*{empleado.fechaIngreso}" required>
-
-                <label class="login-label" for="idRol">Rol</label>
-                <select class="login-input" id="idRol" name="idRol" required>
-                    <option value="">Seleccione un rol</option>
-                    <option th:each="rol : ${roles}" th:value="${rol.id}"
-                            th:selected="${usuario.rol != null and usuario.rol.id == rol.id}"
-                            th:text="${rol.nombreRol}"></option>
-                </select>
-
-                <label class="login-label" for="estado">Estado</label>
-                <select class="login-input" id="estado" th:field="*{estado}" required>
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-
-                <th:block th:if="${usuario.id == null}">
-                    <label class="login-label" for="contrasenaInicial">Contraseña inicial</label>
-                    <input class="login-input" type="password" id="contrasenaInicial" name="contrasenaInicial" minlength="6" required>
-                </th:block>
-                <th:block th:unless="${usuario.id == null}">
-                    <label class="login-label" for="nuevaContrasena">Nueva contraseña (opcional)</label>
-                    <input class="login-input" type="password" id="nuevaContrasena" name="nuevaContrasena" minlength="6" placeholder="Mínimo 6 caracteres">
-                </th:block>
-
-                <button type="submit" class="new-sale-btn login-submit">Guardar</button>
-                <a th:href="@{/usuarios}" style="margin-top:10px; text-align:center; color:#6b8a86;">Cancelar</a>
+                <div class="usr-form-footer">
+                    <button type="submit" class="new-sale-btn">
+                        <svg class="feather" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+                        Guardar
+                    </button>
+                    <a th:href="@{/usuarios}" class="form-cancel">Cancelar</a>
+                    <span class="usr-form-hint">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+                        Todos los campos son obligatorios
+                    </span>
+                </div>
             </form>
         </div>
     </div>
 </main>
+<script>
+    function toggleUsrPassword(inputId, btn) {
+        const input = document.getElementById(inputId);
+        input.type = input.type === 'password' ? 'text' : 'password';
+        btn.classList.toggle('usr-password-toggle-active');
+    }
+</script>
 </body>
 </html>

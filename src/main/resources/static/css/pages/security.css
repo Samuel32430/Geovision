@@ -1,0 +1,173 @@
+/* ---------- Seguridad: topbar profile ---------- */
+.seg-topbar-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.seg-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #2bb3a3;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.seg-topbar-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1f2d2d;
+}
+
+.seg-topbar-role {
+    font-size: 12px;
+    color: #6b8a86;
+}
+
+.seg-logout-form {
+    margin: 0;
+}
+
+.seg-logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: 1px solid #e3efec;
+    color: #2d3a3a;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.seg-logout-btn:hover {
+    background: #f1faf8;
+}
+
+/* ---------- Seguridad: welcome banner ---------- */
+.seg-banner {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #2bb3a3, #1f8f82);
+    border-radius: 18px;
+    padding: 28px 32px;
+    color: #ffffff;
+}
+
+.seg-banner-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.seg-banner-text {
+    flex: 1;
+}
+
+.seg-banner-text h3 {
+    font-size: 24px;
+    font-weight: 800;
+}
+
+.seg-banner-text p {
+    margin-top: 4px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.seg-role-badge {
+    background: rgba(255, 255, 255, 0.22);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* ---------- Seguridad: module cards ---------- */
+.seg-section-title {
+    margin: 28px 0 16px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #0f1717;
+}
+
+.seg-modules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.seg-module-card {
+    background: #ffffff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    border: 1px solid rgb(57 66 63 / 0.15);
+    transition: all 0.2s ease-in-out;
+}
+
+.seg-module-card .top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.seg-module-card:hover{
+    box-shadow: 0 1px 2px rgb(75 255 213 / 0.11);;
+    transform: translateY(-3px);
+}
+
+.seg-chevron {
+    color: #9ba8a8;
+    font-size: 20px;
+    line-height: 1;
+}
+
+.seg-module-title {
+    font-weight: 700;
+    font-size: 16px;
+    color: #0f1717;
+}
+
+.seg-module-desc {
+    margin-top: 6px;
+    font-size: 13px;
+    color: #6b8a86;
+}
+
+
+.seg-actions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 26px;
+}
+
+.seg-action-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.seg-action-btn {
+    margin-top: 16px;
+    align-self: flex-start;
+}
+

@@ -1,0 +1,62 @@
+/* ---------- Login ---------- */
+.login-body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 40px 36px;
+    width: 360px;
+    border: 1px solid rgb(57 66 63 / 0.15);
+    text-align: center;
+}
+
+.login-card .brand {
+    margin-bottom: 28px;
+}
+
+
+.login-error {
+    color: #c0392b;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.login-info {
+    color: #2a9d56;
+    font-size: 13px;
+    margin-top: 4px;
+}
+.usr-password-wrap {
+    position: relative;
+    display: flex;
+}
+
+.usr-password-wrap .login-input {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.usr-password-toggle {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ba8a8;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.usr-password-toggle-active {
+    color: #2bb3a3;
+}
+
+.usr-estado-toggle {
+    display: flex;
+    gap: 16px;
+}
