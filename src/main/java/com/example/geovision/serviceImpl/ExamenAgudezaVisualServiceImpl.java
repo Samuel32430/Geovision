@@ -40,4 +40,14 @@ public class ExamenAgudezaVisualServiceImpl implements ExamenAgudezaVisualServic
     public Iterable<ExamenAgudezaVisual> findAll() {
         return examenAgudezaVisualRepository.findAll();
     }
+
+    @Override
+    public Optional<ExamenAgudezaVisual> getLatestExamenByPaciente(Long idPaciente) {
+        return examenAgudezaVisualRepository.findFirstByPacienteIdOrderByIdDesc(idPaciente);
+    }
+
+    @Override
+    public java.util.List<ExamenAgudezaVisual> getHistorialByPaciente(Long idPaciente) {
+        return examenAgudezaVisualRepository.findAllByPacienteIdOrderByFechaExamenDesc(idPaciente);
+    }
 }

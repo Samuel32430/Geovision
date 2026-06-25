@@ -1,0 +1,414 @@
+/* Examen Agudeza Visual Formulario Styles */
+
+.examen-layout {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.left-panel {
+    flex: 0 0 320px;
+}
+
+.right-panel {
+    flex: 1;
+}
+
+.patient-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #e3efec;
+    margin-bottom: 24px;
+}
+
+.patient-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #8aa3a0;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.patient-status {
+    background: #e6f5f1;
+    color: #2bb3a3;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.patient-profile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.patient-avatar-large {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #64ffda;
+    color: #004d40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.patient-name-large {
+    font-size: 18px;
+    font-weight: 800;
+    color: #0f1717;
+    margin-bottom: 4px;
+}
+
+.patient-historia {
+    color: #8aa3a0;
+    font-size: 13px;
+}
+
+.patient-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.patient-detail-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.patient-detail-label {
+    color: #6b8a86;
+}
+
+.patient-detail-value {
+    color: #1f2d2d;
+    font-weight: 600;
+}
+
+.btn-change-patient {
+    width: 100%;
+    background: transparent;
+    border: 1px solid #2bb3a3;
+    color: #2bb3a3;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-change-patient:hover {
+    background: #f1faf8;
+}
+
+/* Right Panel (Form) */
+.examen-form-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #e3efec;
+}
+
+.examen-form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+}
+
+.examen-title-group h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f1717;
+    margin-bottom: 4px;
+}
+
+.examen-title-group p {
+    color: #6b8a86;
+    font-size: 14px;
+}
+
+.examen-date-group {
+    text-align: right;
+}
+
+.examen-date-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #8aa3a0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+}
+
+.examen-date-value {
+    font-size: 18px;
+    font-weight: 800;
+    color: #2bb3a3;
+}
+
+/* Medidas Opticas Table */
+.medidas-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    gap: 1px;
+    background: #e3efec;
+    border: 1px solid #e3efec;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+
+.medidas-cell {
+    background: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.medidas-header {
+    background: #f8fcfb;
+    color: #4a5959;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.medidas-label {
+    justify-content: flex-start;
+    font-weight: 600;
+    color: #4a5959;
+    font-size: 14px;
+}
+
+.medida-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #cfd8d6;
+    border-radius: 6px;
+    font-size: 15px;
+    text-align: center;
+    color: #1f2d2d;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.medida-input:focus {
+    border-color: #2bb3a3;
+}
+
+/* Extra fields */
+.extra-fields-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #4a5959;
+}
+
+.text-input {
+    padding: 14px 16px;
+    border: 1px solid #cfd8d6;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #1f2d2d;
+    outline: none;
+    width: 100%;
+    font-family: inherit;
+}
+
+.text-input:focus {
+    border-color: #2bb3a3;
+}
+
+textarea.text-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.input-with-suffix {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-with-suffix input {
+    padding-left: 50px;
+    padding-right: 40px;
+}
+
+.suffix-label {
+    position: absolute;
+    right: 16px;
+    color: #8aa3a0;
+    font-size: 14px;
+    pointer-events: none;
+}
+.prefix-label {
+    position: absolute;
+    left: 16px;
+    color: #8aa3a0;
+    font-size: 14px;
+    pointer-events: none;
+}
+
+/* Actions */
+.examen-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 40px;
+}
+
+.examen-actions-row {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-examen {
+    flex: 1;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+    border: none;
+}
+
+.btn-cancel {
+    background: #f4f6f8;
+    color: #4a5959;
+}
+.btn-cancel:hover { background: #e3efec; }
+
+.btn-clear {
+    background: transparent;
+    border: 1px solid #2bb3a3;
+    color: #2bb3a3;
+}
+.btn-clear:hover { background: #f1faf8; }
+
+.btn-save-outline {
+    background: transparent;
+    border: 1px solid #2bb3a3;
+    color: #2bb3a3;
+}
+.btn-save-outline:hover { background: #f1faf8; }
+
+.btn-save-main {
+    background: #00695c;
+    color: #ffffff;
+    width: 100%;
+    padding: 16px;
+}
+.btn-save-main:hover {
+    background: #004d40;
+}
+
+/* Modal Selector */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-overlay.open {
+    display: flex;
+}
+
+.modal-content {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 500px;
+    max-width: 90%;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h3 {
+    font-size: 20px;
+    font-weight: 800;
+    color: #0f1717;
+}
+
+.btn-close-modal {
+    background: none;
+    border: none;
+    color: #8aa3a0;
+    cursor: pointer;
+    padding: 4px;
+}
+
+.patient-list-modal {
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.patient-item-modal {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e3efec;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.patient-item-modal:hover {
+    background: #f1faf8;
+    border-color: #2bb3a3;
+}

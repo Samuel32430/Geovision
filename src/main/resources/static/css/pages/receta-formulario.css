@@ -1,0 +1,96 @@
+/* Receta Oftalmica Formulario Styles */
+
+.receta-layout {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.readonly-medidas-grid {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr;
+    gap: 1px;
+    background: #e3efec;
+    border: 1px solid #e3efec;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 32px;
+}
+
+.readonly-cell {
+    background: #ffffff;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2d2d;
+}
+
+.readonly-header {
+    background: #f8fcfb;
+    color: #4a5959;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.readonly-label {
+    justify-content: flex-start;
+    font-weight: 600;
+    color: #4a5959;
+    font-size: 14px;
+}
+
+.readonly-value-box {
+    background: #f8fcfb;
+    border: 1px solid #e3efec;
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1f2d2d;
+}
+
+/* Modal Edit Examen */
+.modal-edit-examen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.modal-edit-examen.open {
+    display: flex;
+}
+
+.modal-edit-content {
+    background: #ffffff;
+    border-radius: 12px;
+    width: 800px;
+    max-width: 95%;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 32px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+.empty-state-card {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state-icon {
+    width: 48px;
+    height: 48px;
+    color: #cfd8d6;
+    margin-bottom: 16px;
+}
+
+.empty-state-text {
+    color: #6b8a86;
+    font-size: 15px;
+}

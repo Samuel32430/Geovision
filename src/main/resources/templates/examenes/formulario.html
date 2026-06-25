@@ -1,0 +1,390 @@
+﻿<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Vision - Registrar Examen</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="brand">
+        <h1>Geo Vision</h1>
+        <p>Sistema de Ventas</p>
+    </div>
+
+    <nav class="nav">
+        <a th:href="@{/dashboard}">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </span>
+            Inicio
+        </a>
+        <div class="nav-dropdown open" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+            <a href="#" class="dropdown-toggle" onclick="this.parentElement.classList.toggle('open'); return false;">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                Atencion al Paciente
+                <svg class="feather dropdown-icon" viewBox="0 0 24 24" style="margin-left:auto; width:16px; height:16px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <div class="dropdown-menu">
+                <a th:href="@{/pacientes}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Pacientes
+                </a>
+                <a th:href="@{/historial}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Historial de Pacientes
+                </a>
+                <a th:href="@{/recetas/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Generar receta
+                </a>
+                <a th:href="@{/examenes/nuevo}" class="dropdown-item active">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar examen
+                </a>
+
+                <a th:href="@{/pacientes/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar paciente
+                </a>
+            </div>
+        </div>
+        <a href="#" sec:authorize="hasAuthority('MODULO_VENTAS')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+            </span>
+            Ventas
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_LABORATORIO')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><path d="M9 2h6v4H9z"/><path d="M12 6v8"/><circle cx="12" cy="18" r="4"/></svg>
+            </span>
+            Laboratorio
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_INVENTARIO')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </span>
+            Inventario
+        </a>
+        <span class="nav-section-label" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">Seguridad</span>
+        <a th:href="@{/seguridad}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </span>
+            Seguridad
+        </a>
+        <a th:href="@{/usuarios}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+            </span>
+            Gestión de Usuarios
+        </a>
+        <a th:href="@{/roles}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            Roles y Permisos
+        </a>
+    </nav>
+
+    <div class="user-card">
+        <div class="avatar"></div>
+        <div>
+            <div class="name" sec:authentication="principal.usuario.empleado.persona.nombres">Nombre</div>
+            <div class="role" sec:authentication="principal.usuario.rol.nombreRol">Rol</div>
+        </div>
+    </div>
+
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit" class="logout-btn">Cerrar sesión</button>
+    </form>
+</aside>
+
+<!-- Main -->
+<main class="main" style="background: #f4f6f8;">
+    <div class="topbar">
+        <h2 style="font-weight: 900; font-size: 26px;">Atención al Paciente</h2>
+        <div class="actions">
+            <div style="display:flex; gap:16px; color:#4a5959;">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <svg class="feather" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <div style="width:24px; height:24px; border-radius:50%; background:#2bb3a3;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div style="padding: 0 40px; margin-top: 16px; color: #8aa3a0; font-size: 13px;">
+        <span>Atención al Paciente > <strong>Examen Visual</strong></span>
+    </div>
+
+    <div class="content-wrapper" style="padding-top:0;">
+        <form th:action="@{/examenes}" method="post" id="examenForm">
+            <input type="hidden" id="idPacienteSeleccionado" name="idPacienteSeleccionado" required>
+            
+            <div class="examen-layout">
+                <!-- Left Panel -->
+                <div class="left-panel">
+                    <div class="patient-card" id="patientInfoCard" style="display: none;">
+                        <div class="patient-card-header">
+                            <span>Paciente Seleccionado</span>
+                            <span class="patient-status" id="displayEstado">ACTIVO</span>
+                        </div>
+                        <div class="patient-profile">
+                            <div class="patient-avatar-large" id="displayInitials">--</div>
+                            <div>
+                                <div class="patient-name-large" id="displayNombre">Seleccione Paciente</div>
+                                <div class="patient-historia" id="displayId">Historia: #--</div>
+                            </div>
+                        </div>
+                        <div class="patient-details-list">
+                            <div class="patient-detail-item">
+                                <span class="patient-detail-label">DNI:</span>
+                                <span class="patient-detail-value" id="displayDni">--</span>
+                            </div>
+                            <div class="patient-detail-item">
+                                <span class="patient-detail-label">Edad:</span>
+                                <span class="patient-detail-value" id="displayEdad">-- años</span>
+                            </div>
+                            <div class="patient-detail-item">
+                                <span class="patient-detail-label">Teléfono:</span>
+                                <span class="patient-detail-value" id="displayTelefono">--</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-change-patient" onclick="openPatientModal()">
+                            <svg class="feather" viewBox="0 0 24 24"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                            Cambiar paciente
+                        </button>
+                    </div>
+                    
+                    <div class="patient-card" id="noPatientCard">
+                        <div style="text-align:center; padding: 40px 0;">
+                            <svg class="feather" viewBox="0 0 24 24" style="width:40px; height:40px; color:#cfd8d6; margin-bottom:16px;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                            <p style="color:#6b8a86; margin-bottom:16px;">Debe seleccionar un paciente para el examen.</p>
+                            <button type="button" class="btn-change-patient" onclick="openPatientModal()">Seleccionar Paciente</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel -->
+                <div class="right-panel">
+                    <div class="examen-form-card">
+                        <div class="examen-form-header">
+                            <div class="examen-title-group">
+                                <h3>Medidas Ópticas</h3>
+                                <p>Ingrese los parámetros detallados del examen de refracción.</p>
+                            </div>
+                            <div class="examen-date-group">
+                                <div class="examen-date-label">FECHA DE EXAMEN</div>
+                                <div class="examen-date-value" id="currentDateDisplay">--</div>
+                            </div>
+                        </div>
+
+                        <!-- Table Grid -->
+                        <div class="medidas-grid">
+                            <!-- Headers -->
+                            <div class="medidas-cell medidas-header" style="background:#f4f6f8;">PARÁMETRO</div>
+                            <div class="medidas-cell medidas-header" style="color:#2bb3a3;">Ojo Derecho (OD)</div>
+                            <div class="medidas-cell medidas-header" style="color:#2bb3a3;">Ojo Izquierdo (OI)</div>
+                            
+                            <!-- Row 1: Esfera -->
+                            <div class="medidas-cell medidas-label">Esfera</div>
+                            <div class="medidas-cell"><input type="number" step="0.25" class="medida-input" th:field="*{examen.esferaOd}" placeholder="-0.00" required></div>
+                            <div class="medidas-cell"><input type="number" step="0.25" class="medida-input" th:field="*{examen.esferaOi}" placeholder="-0.00" required></div>
+                            
+                            <!-- Row 2: Cilindro -->
+                            <div class="medidas-cell medidas-label">Cilindro</div>
+                            <div class="medidas-cell"><input type="number" step="0.25" class="medida-input" th:field="*{examen.cilindroOd}" placeholder="-0.00" required></div>
+                            <div class="medidas-cell"><input type="number" step="0.25" class="medida-input" th:field="*{examen.cilindroOi}" placeholder="-0.00" required></div>
+                            
+                            <!-- Row 3: Eje -->
+                            <div class="medidas-cell medidas-label">Eje</div>
+                            <div class="medidas-cell"><input type="number" step="1" min="0" max="180" class="medida-input" th:field="*{examen.ejeOd}" placeholder="0°" required></div>
+                            <div class="medidas-cell"><input type="number" step="1" min="0" max="180" class="medida-input" th:field="*{examen.ejeOi}" placeholder="0°" required></div>
+                        </div>
+
+                        <!-- Extra fields -->
+                        <div class="extra-fields-row">
+                            <div class="field-group">
+                                <label class="field-label">Distancia Interpupilar (DIP)</label>
+                                <div class="input-with-suffix">
+                                    <span class="prefix-label">Ej: </span>
+                                    <input type="number" step="0.5" class="text-input" th:field="*{examen.dip}" placeholder="62" required>
+                                    <span class="suffix-label">mm</span>
+                                </div>
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Adición (Opcional)</label>
+                                <input type="number" step="0.25" class="text-input" th:field="*{examen.adicion}" placeholder="+0.00">
+                            </div>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Material Recomendado</label>
+                            <select class="text-input" th:field="*{examen.materialRecomendado}">
+                                <option value="">Seleccione material...</option>
+                                <option value="Resina">Resina</option>
+                                <option value="Policarbonato">Policarbonato</option>
+                                <option value="Vidrio">Vidrio</option>
+                                <option value="Alto Indice">Alto Índice</option>
+                            </select>
+                        </div>
+
+                        <div class="field-group">
+                            <label class="field-label">Observaciones</label>
+                            <textarea class="text-input" th:field="*{examen.observaciones}" placeholder="Notas clínicas adicionales, requerimientos específicos del paciente o hallazgos notables..."></textarea>
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="examen-actions">
+                            <div class="examen-actions-row">
+                                <a th:href="@{/dashboard}" class="btn-examen btn-cancel" style="text-decoration:none;">Cancelar</a>
+                                <button type="reset" class="btn-examen btn-clear">
+                                    <svg class="feather" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    Limpiar
+                                </button>
+                                <button type="button" onclick="submitExamenForm()" class="btn-examen btn-save-outline">
+                                    <svg class="feather" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+                                    Guardar examen
+                                </button>
+                            </div>
+                            <button type="button" onclick="submitExamenYRecetaForm()" class="btn-examen btn-save-main">
+                                <svg class="feather" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                                Guardar + Generar Receta
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- Patient Modal Selector -->
+<div class="modal-overlay" id="patientModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Seleccionar Paciente</h3>
+            <button class="btn-close-modal" onclick="closePatientModal()">
+                <svg class="feather" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <div style="position:relative;">
+            <svg class="feather" style="position:absolute; left:12px; top:12px; color:#adb5bd;" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="patientSearchInput" class="text-input" style="padding-left:44px;" placeholder="Buscar por nombre o DNI..." onkeyup="filterPatients()">
+        </div>
+        <div class="patient-list-modal" id="patientListContainer">
+            <!-- Patient items generated by Thymeleaf -->
+            <div class="patient-item-modal patient-item-row" th:each="p : ${pacientes}" 
+                 th:data-id="${p.id}"
+                 th:data-dni="${p.persona.dni}"
+                 th:data-nombres="${p.persona.nombres}"
+                 th:data-apellidos="${p.persona.apellidos}"
+                 th:data-telefono="${p.persona.telefono}"
+                 th:data-estado="${p.estado}"
+                 th:data-fecha="${p.fechaNacimiento}"
+                 onclick="selectPatient(this)">
+                <div class="avatar-initials" style="width:32px; height:32px; font-size:12px; background:#2bb3a3;" th:text="${#strings.substring(p.persona.nombres,0,1) + #strings.substring(p.persona.apellidos,0,1)}"></div>
+                <div>
+                    <div style="font-weight:700; color:#1f2d2d; font-size:14px;" class="p-name" th:text="${p.persona.nombres + ' ' + p.persona.apellidos}"></div>
+                    <div style="color:#8aa3a0; font-size:12px;" class="p-dni" th:text="'DNI: ' + ${p.persona.dni}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Set Current Date
+    const dateOptions = { day: 'numeric', month: 'short', year: 'numeric' };
+    document.getElementById('currentDateDisplay').textContent = new Date().toLocaleDateString('es-ES', dateOptions).toUpperCase();
+
+    function openPatientModal() {
+        document.getElementById('patientModal').classList.add('open');
+        document.getElementById('patientSearchInput').focus();
+    }
+
+    function closePatientModal() {
+        document.getElementById('patientModal').classList.remove('open');
+    }
+
+    function filterPatients() {
+        const query = document.getElementById('patientSearchInput').value.toLowerCase();
+        const items = document.querySelectorAll('.patient-item-row');
+        items.forEach(item => {
+            const name = item.querySelector('.p-name').textContent.toLowerCase();
+            const dni = item.querySelector('.p-dni').textContent.toLowerCase();
+            if(name.includes(query) || dni.includes(query)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function calculateAge(dob) {
+        if(!dob) return '--';
+        const diff_ms = Date.now() - new Date(dob).getTime();
+        const age_dt = new Date(diff_ms); 
+        return Math.abs(age_dt.getUTCFullYear() - 1970);
+    }
+
+    function selectPatient(element) {
+        const id = element.getAttribute('data-id');
+        const dni = element.getAttribute('data-dni');
+        const nombres = element.getAttribute('data-nombres');
+        const apellidos = element.getAttribute('data-apellidos');
+        const telefono = element.getAttribute('data-telefono');
+        const estado = element.getAttribute('data-estado');
+        const fecha = element.getAttribute('data-fecha');
+
+        // Set form field
+        document.getElementById('idPacienteSeleccionado').value = id;
+
+        // Update UI
+        document.getElementById('displayInitials').textContent = nombres.charAt(0) + apellidos.charAt(0);
+        document.getElementById('displayNombre').textContent = nombres + ' ' + apellidos;
+        document.getElementById('displayId').textContent = 'Historia: #' + String(id).padStart(4, '0');
+        document.getElementById('displayDni').textContent = dni;
+        document.getElementById('displayTelefono').textContent = telefono || '--';
+        document.getElementById('displayEdad').textContent = calculateAge(fecha) + ' años';
+        document.getElementById('displayEstado').textContent = String(estado).toUpperCase();
+
+        document.getElementById('noPatientCard').style.display = 'none';
+        document.getElementById('patientInfoCard').style.display = 'block';
+
+        closePatientModal();
+    }
+
+    function submitExamenForm() {
+        if(!document.getElementById('idPacienteSeleccionado').value) {
+            alert("Debe seleccionar un paciente antes de guardar el examen.");
+            return;
+        }
+        document.getElementById('examenForm').submit();
+    }
+
+    function submitExamenYRecetaForm() {
+        if(!document.getElementById('idPacienteSeleccionado').value) {
+            alert("Debe seleccionar un paciente antes de guardar el examen y generar la receta.");
+            return;
+        }
+        // Add a hidden input to indicate receta generation
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'generarReceta';
+        input.value = 'true';
+        document.getElementById('examenForm').appendChild(input);
+        
+        document.getElementById('examenForm').submit();
+    }
+</script>
+</body>
+</html>
+
+
