@@ -74,6 +74,7 @@ public class UsuarioController {
         Persona persona = datosFormulario.getEmpleado().getPersona();
         persona.setTipoPersona("empleado");
         persona.setFechaRegistro(hoy);
+        persona.setDni(persona.getDni());
         persona = personaService.save(persona);
 
         Empleado empleado = datosFormulario.getEmpleado();
