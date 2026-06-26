@@ -17,8 +17,6 @@
     <form th:action="@{/login}" method="post" class="login-form">
         <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
-        <p class="login-error" th:if="${param.error}">Usuario o contraseña incorrectos.</p>
-        <p class="login-info" th:if="${param.logout}">Sesión cerrada correctamente.</p>
 
         <label class="login-label" for="username">Usuario</label>
         <input class="login-input" type="text" id="username" name="username" autocomplete="username" required autofocus>
@@ -31,6 +29,13 @@
             </button>
         </div>
 
+        <p class="login-error" th:if="${param.error}">Usuario o contraseña incorrectos.</p>
+        <p class="login-info" th:if="${param.logout}">Sesión cerrada correctamente.</p>
+
+
+        <div>
+            <p class="login-text">Olvidaste tu contraseña? <a  class="recupera-contrasena">Recupera tu contraseña</a></p>
+        </div>
 
         <button type="submit" class="new-sale-btn login-submit">Ingresar</button>
     </form>

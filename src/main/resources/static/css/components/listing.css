@@ -10,7 +10,7 @@
     background: #ffffff;
     border-radius: 16px;
     padding: 26px 28px;
-    min-height: 340px;
+    height: auto;
     border: 1px solid rgb(57 66 63 / 0.15);
 }
 

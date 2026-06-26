@@ -106,6 +106,16 @@
                   method="post" class="usr-form">
                 <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
 
+                <div class="usr-form-alert" th:if="${errorRegistro != null}">
+                    <span class="usr-form-alert-icon">
+                        <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </span>
+                    <div>
+                        <div class="usr-form-alert-title">Error de Registro</div>
+                        <div class="usr-form-alert-text" th:text="${errorRegistro}"></div>
+                    </div>
+                </div>
+
                 <div class="usr-form-section">
                     <span class="usr-form-section-bar"></span>
                     <span class="usr-form-section-title">Información personal</span>
@@ -129,7 +139,9 @@
                     </div>
                     <div class="usr-form-field">
                         <label class="login-label" for="dni">Documento de indentidad</label>
-                        <input class="login-input" type="text" id="dni" th:field="*{empleado.persona.dni}" placeholder="00000000" minlength="3" required>
+                        <input class="login-input" type="text" id="dni" th:field="*{empleado.persona.dni}" placeholder="00000000" minlength="3" required
+                               th:classappend="${camposConError != null and camposConError.contains('dni')} ? 'usr-input-error'">
+                        <div class="usr-field-error" th:if="${camposConError != null and camposConError.contains('dni')}">Este documento de identidad ya está registrado</div>
                     </div>
                 </div>
 
@@ -140,7 +152,9 @@
                 <div class="usr-form-grid">
                     <div class="usr-form-field">
                         <label class="login-label" for="usuarioLogin">Nombre de usuario</label>
-                        <input class="login-input" type="text" id="usuarioLogin" th:field="*{usuarioLogin}" placeholder="j.perez" required>
+                        <input class="login-input" type="text" id="usuarioLogin" th:field="*{usuarioLogin}" placeholder="j.perez" required
+                               th:classappend="${camposConError != null and camposConError.contains('usuarioLogin')} ? 'usr-input-error'">
+                        <div class="usr-field-error" th:if="${camposConError != null and camposConError.contains('usuarioLogin')}">Este nombre de usuario ya está en uso</div>
                     </div>
                     <div class="usr-form-field">
                         <label class="login-label" for="cargo">Cargo</label>

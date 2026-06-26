@@ -40,4 +40,14 @@ public class PersonaServiceImpl implements PersonaService {
     public Iterable<Persona> findAll() {
         return personaRepository.findAll();
     }
+
+    @Override
+    public boolean existsByDni(String dni) {
+        return personaRepository.existsByDni(dni);
+    }
+
+    @Override
+    public boolean existsByDniAndIdNot(String dni, Long id) {
+        return personaRepository.existsByDniAndIdNot(dni, id);
+    }
 }
