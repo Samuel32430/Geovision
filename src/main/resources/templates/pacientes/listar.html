@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
@@ -140,8 +140,27 @@
 
         <div class="search-container">
             <svg class="icon feather" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-            <input type="text" placeholder="Buscar por paciente o DNI...">
+            <input type="text" id="searchInput" placeholder="Buscar por paciente o DNI..." onkeyup="filterTable()">
         </div>
+
+        <script>
+            function filterTable() {
+                const input = document.getElementById("searchInput");
+                const filter = input.value.toLowerCase();
+                const tbody = document.querySelector(".table tbody");
+                const trs = tbody.getElementsByTagName("tr");
+
+                for (let i = 0; i < trs.length; i++) {
+                    const tr = trs[i];
+                    const textContent = tr.textContent.toLowerCase();
+                    if (textContent.indexOf(filter) > -1) {
+                        tr.style.display = "";
+                    } else {
+                        tr.style.display = "none";
+                    }
+                }
+            }
+        </script>
 
         <div class="list-card">
             <table class="table">
@@ -172,7 +191,8 @@
                     <td class="table-text" th:text="${paciente.persona.correo}">correo</td>
                     <td class="table-text" th:text="${paciente.persona.telefono}">telefono</td>
                     <td class="table-text" th:text="${paciente.fechaNacimiento}">fecha</td>
-                    <td class="actions-cell">
+                    <td class="actions-cell" style="display:flex; gap:16px; align-items:center;">
+                        <a th:href="@{/pacientes/{id}/ver(id=${paciente.id})}" class="edit-link" style="color:#6b8a86;">Ver</a>
                         <a th:href="@{/pacientes/{id}/editar(id=${paciente.id})}" class="edit-link">Editar</a>
                     </td>
                 </tr>

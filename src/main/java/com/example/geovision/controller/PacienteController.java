@@ -35,12 +35,21 @@ public class PacienteController {
         Paciente paciente = new Paciente();
         paciente.setPersona(new Persona());
         model.addAttribute("paciente", paciente);
+        model.addAttribute("isReadonly", false);
         return "pacientes/formulario";
     }
 
     @GetMapping("/pacientes/{id}/editar")
     public String editarFormulario(@PathVariable Long id, Model model) {
         model.addAttribute("paciente", pacienteService.findById(id));
+        model.addAttribute("isReadonly", false);
+        return "pacientes/formulario";
+    }
+
+    @GetMapping("/pacientes/{id}/ver")
+    public String verPaciente(@PathVariable Long id, Model model) {
+        model.addAttribute("paciente", pacienteService.findById(id));
+        model.addAttribute("isReadonly", true);
         return "pacientes/formulario";
     }
 
