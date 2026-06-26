@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geo Vision - Historial de Pacientes</title>
+    <link rel="stylesheet" th:href="@{/styles.css}">
+</head>
+<body>
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="brand">
+        <h1>Geo Vision</h1>
+        <p>Sistema de Ventas</p>
+    </div>
+
+    <nav class="nav">
+        <a th:href="@{/dashboard}">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </span>
+            Inicio
+        </a>
+        <div class="nav-dropdown open" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+            <a href="#" class="dropdown-toggle" onclick="this.parentElement.classList.toggle('open'); return false;">
+                <span class="icon">
+                    <svg class="feather" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </span>
+                Atencion al Paciente
+                <svg class="feather dropdown-icon" viewBox="0 0 24 24" style="margin-left:auto; width:16px; height:16px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <div class="dropdown-menu">
+                <a th:href="@{/pacientes}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Pacientes
+                </a>
+                <a th:href="@{/historial}" class="dropdown-item active">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Historial de Pacientes
+                </a>
+                <a th:href="@{/recetas/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Generar receta
+                </a>
+                <a th:href="@{/examenes/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar examen
+                </a>
+                <a th:href="@{/pacientes/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar paciente
+                </a>
+            </div>
+        </div>
+        <a href="#" sec:authorize="hasAuthority('MODULO_VENTAS')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
+            </span>
+            Ventas
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_LABORATORIO')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><path d="M9 2h6v4H9z"/><path d="M12 6v8"/><circle cx="12" cy="18" r="4"/></svg>
+            </span>
+            Laboratorio
+        </a>
+        <a href="#" sec:authorize="hasAuthority('MODULO_INVENTARIO')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </span>
+            Inventario
+        </a>
+        <span class="nav-section-label" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">Seguridad</span>
+        <a th:href="@{/seguridad}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </span>
+            Seguridad
+        </a>
+        <a th:href="@{/usuarios}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M1 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/></svg>
+            </span>
+            Gestión de Usuarios
+        </a>
+        <a th:href="@{/roles}" sec:authorize="hasAuthority('MODULO_SEGURIDAD')">
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </span>
+            Roles y Permisos
+        </a>
+    </nav>
+
+    <div class="user-card">
+        <div class="avatar"></div>
+        <div>
+            <div class="name" sec:authentication="principal.usuario.empleado.persona.nombres">Nombre</div>
+            <div class="role" sec:authentication="principal.usuario.rol.nombreRol">Rol</div>
+        </div>
+    </div>
+
+    <form th:action="@{/logout}" method="post" class="logout-form">
+        <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <button type="submit" class="logout-btn">Cerrar sesión</button>
+    </form>
+</aside>
+
+<!-- Main -->
+<main class="main" style="background: #f4fbf9; min-height: 100vh;">
+    <div style="padding: 24px 40px; color: #8aa3a0; font-size: 13px;">
+        <span>Atención al Paciente > <strong>Historial</strong></span>
+    </div>
+
+    <div class="content-wrapper" style="padding-top:0;">
+        
+        <!-- Search Container -->
+        <div class="historial-search-container" id="searchContainer">
+            <svg class="feather search-icon-h" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="searchInput" placeholder="Buscar por DNI, nombre o teléfono..." autocomplete="off" onkeyup="filterDropdown()">
+            <button class="btn-historial-search">Buscar</button>
+            
+            <div class="search-dropdown" id="searchDropdown">
+                <div th:each="p : ${pacientes}" class="search-dropdown-item dropdown-patient" 
+                     th:data-id="${p.id}" 
+                     onclick="selectSearchPatient(this)" style="display:none;">
+                    <div class="avatar-initials" style="width:32px; height:32px; font-size:12px; background:#208f8c;" 
+                         th:text="${#strings.substring(p.persona.nombres,0,1) + #strings.substring(p.persona.apellidos,0,1)}"></div>
+                    <div>
+                        <div style="font-weight:700; color:#1f2d2d; font-size:14px;" class="s-name" th:text="${p.persona.nombres + ' ' + p.persona.apellidos}"></div>
+                        <div style="color:#8aa3a0; font-size:12px;" class="s-dni" th:text="'DNI: ' + ${p.persona.dni} + ' • Tel: ' + (${p.persona.telefono} != null ? ${p.persona.telefono} : '--')"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div th:if="${pacienteSeleccionado == null}" class="empty-search-msg">
+            <svg class="feather" style="width:64px; height:64px; color:#cfd8d6; margin-bottom:16px;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <p>Busca un paciente para ver su historial completo y exámenes visuales registrados.</p>
+        </div>
+
+        <!-- Patient Found Card -->
+        <div th:if="${pacienteSeleccionado != null}" class="historial-patient-card">
+            <div class="h-card-left">
+                <div class="h-avatar" th:text="${#strings.substring(pacienteSeleccionado.persona.nombres,0,1) + #strings.substring(pacienteSeleccionado.persona.apellidos,0,1)}">CG</div>
+                <div>
+                    <div class="h-name" th:text="${pacienteSeleccionado.persona.nombres + ' ' + pacienteSeleccionado.persona.apellidos}">Carlos García Mendoza</div>
+                    <div class="h-details">
+                        <span th:text="'DNI: ' + ${pacienteSeleccionado.persona.dni}">DNI: 76543210</span> •
+                        <span th:text="${pacienteSeleccionado.persona.telefono != null ? 'Tel: ' + pacienteSeleccionado.persona.telefono : 'Tel: --'}">Tel: 987-654-321</span><br>
+                        <span>Última visita: </span>
+                        <span th:text="${examenes != null and !examenes.isEmpty() ? #temporals.format(examenes[0].fechaExamen, 'dd MMM yyyy') : '--'}">12 Oct 2023</span>
+                    </div>
+                </div>
+            </div>
+            <div class="h-card-actions">
+                <button type="button" class="btn-h-action" title="Ver exámenes" onclick="toggleExams()">
+                    <svg class="feather" viewBox="0 0 24 24" style="width:24px; height:24px;"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                </button>
+                <button type="button" class="btn-h-action" title="Editar paciente" onclick="openEditPatientModal()">
+                    <svg class="feather" viewBox="0 0 24 24" style="width:24px; height:24px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Exams Section (Hidden by default) -->
+        <div th:if="${pacienteSeleccionado != null}" class="historial-exams-section" id="examsSection">
+            <div class="exams-header-title">Exámenes visuales</div>
+            
+            <table class="exams-table">
+                <thead>
+                    <tr>
+                        <th>FECHA</th>
+                        <th>ESPECIALISTA</th>
+                        <th>DIAGNÓSTICO</th>
+                        <th>ESTADO</th>
+                    </tr>
+                </thead>
+                <tbody th:if="${examenes == null or examenes.isEmpty()}">
+                    <tr>
+                        <td colspan="4" style="text-align:center; padding:32px; color:#8aa3a0;">El paciente no tiene exámenes visuales registrados.</td>
+                    </tr>
+                </tbody>
+                <tbody th:if="${examenes != null and !examenes.isEmpty()}">
+                    <th:block th:each="ex : ${examenes}">
+                        <!-- Visible Row -->
+                        <tr class="exams-row" th:onclick="'toggleDetail(' + ${ex.id} + ')'">
+                            <td th:text="${#temporals.format(ex.fechaExamen, 'dd MMM yyyy')}">12 Oct 2023</td>
+                            <td th:text="${ex.empleadoRegistro.persona.nombres + ' ' + ex.empleadoRegistro.persona.apellidos}">Dr. Martínez</td>
+                            <td th:text="${ex.observaciones != null and !ex.observaciones.isEmpty() ? ex.observaciones : 'Control de rutina'}">Miopía progresiva OD/OI</td>
+                            <td>
+                                <span class="badge-estado completado" th:if="${ex.estado == 'ACTIVO' or ex.estado == 'VIGENTE'}">Completado</span>
+                                <span class="badge-estado archivado" th:unless="${ex.estado == 'ACTIVO' or ex.estado == 'VIGENTE'}">Archivado</span>
+                            </td>
+                        </tr>
+                        <!-- Hidden Detail Row -->
+                        <tr class="exam-detail-row" th:id="'detail-' + ${ex.id}">
+                            <td colspan="4" style="padding:0;">
+                                <div class="exam-detail-container">
+                                    <div class="detail-title" th:text="'Detalle · ' + ${#temporals.format(ex.fechaExamen, 'dd MMM yyyy')}">Detalle · 12 Oct 2023</div>
+                                    <div class="detail-grid">
+                                        <div class="d-col">
+                                            <span class="d-col-header">Ojo</span>
+                                            <span class="d-val">OD</span>
+                                            <span class="d-val">OI</span>
+                                        </div>
+                                        <div class="d-col">
+                                            <span class="d-col-header">Esfera</span>
+                                            <span class="d-val" th:text="${ex.esferaOd}">-2.50</span>
+                                            <span class="d-val" th:text="${ex.esferaOi}">-2.25</span>
+                                        </div>
+                                        <div class="d-col">
+                                            <span class="d-col-header">Cilindro</span>
+                                            <span class="d-val" th:text="${ex.cilindroOd}">-0.75</span>
+                                            <span class="d-val" th:text="${ex.cilindroOi}">-0.50</span>
+                                        </div>
+                                        <div class="d-col">
+                                            <span class="d-col-header">Eje</span>
+                                            <span class="d-val" th:text="${ex.ejeOd} + '°'">180°</span>
+                                            <span class="d-val" th:text="${ex.ejeOi} + '°'">175°</span>
+                                        </div>
+                                        <div class="d-col" style="padding-left:16px; border-left:1px solid #c2e0db;">
+                                            <span class="d-col-header">Diagnóstico y observaciones</span>
+                                            <span class="d-val" style="font-weight:500;" th:text="${ex.observaciones != null and !ex.observaciones.isEmpty() ? ex.observaciones : 'Sin observaciones adicionales.'}">Progresión de miopía en OD.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
+                </tbody>
+            </table>
+            
+            <a th:href="@{/examenes/nuevo(idPaciente=${pacienteSeleccionado.id})}" class="btn-nuevo-examen">
+                + Nuevo examen
+            </a>
+        </div>
+
+    </div>
+</main>
+
+<!-- Modal Editar Paciente -->
+<div th:if="${pacienteSeleccionado != null}" class="modal-overlay" id="editPatientModal">
+    <div class="modal-content" style="max-width:500px;">
+        <div class="modal-header">
+            <h3>Editar Datos del Paciente</h3>
+            <button class="btn-close-modal" onclick="closeEditPatientModal()">
+                <svg class="feather" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+        <form th:action="@{/historial/editar-paciente}" method="post" style="padding-top:16px;">
+            <input type="hidden" name="idPaciente" th:value="${pacienteSeleccionado.id}">
+            
+            <div class="field-group">
+                <label class="field-label">Nombres</label>
+                <input type="text" class="text-input" name="nombres" th:value="${pacienteSeleccionado.persona.nombres}" required>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Apellidos</label>
+                <input type="text" class="text-input" name="apellidos" th:value="${pacienteSeleccionado.persona.apellidos}" required>
+            </div>
+            <div class="field-group">
+                <label class="field-label">DNI</label>
+                <input type="text" class="text-input" name="dni" th:value="${pacienteSeleccionado.persona.dni}" required>
+            </div>
+            <div class="field-group">
+                <label class="field-label">Teléfono</label>
+                <input type="text" class="text-input" name="telefono" th:value="${pacienteSeleccionado.persona.telefono}">
+            </div>
+            
+            <div style="display:flex; gap:16px; justify-content:flex-end; margin-top:32px;">
+                <button type="button" class="btn-cancel" onclick="closeEditPatientModal()" style="border:1px solid #cdd7d6; padding:10px 24px; border-radius:8px; background:white; cursor:pointer;">Cancelar</button>
+                <button type="submit" class="btn-save" style="border:none; padding:10px 24px; border-radius:8px; cursor:pointer;">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Search Autocomplete
+    function filterDropdown() {
+        const input = document.getElementById('searchInput');
+        const dropdown = document.getElementById('searchDropdown');
+        const items = document.querySelectorAll('.dropdown-patient');
+        const query = input.value.toLowerCase().trim();
+        
+        if (query.length === 0) {
+            dropdown.classList.remove('open');
+            items.forEach(item => item.style.display = 'none');
+            return;
+        }
+        
+        let hasMatches = false;
+        items.forEach(item => {
+            const name = item.querySelector('.s-name').textContent.toLowerCase();
+            const dni = item.querySelector('.s-dni').textContent.toLowerCase();
+            if(name.includes(query) || dni.includes(query)) {
+                item.style.display = 'flex';
+                hasMatches = true;
+            } else {
+                item.style.display = 'none';
+            }
+        });
+        
+        if(hasMatches) {
+            dropdown.classList.add('open');
+        } else {
+            dropdown.classList.remove('open');
+        }
+    }
+
+    function selectSearchPatient(element) {
+        const id = element.getAttribute('data-id');
+        window.location.href = '/historial?idPaciente=' + id;
+    }
+
+    // Toggle Exams Section
+    function toggleExams() {
+        const section = document.getElementById('examsSection');
+        if(section) {
+            section.classList.toggle('visible');
+        }
+    }
+
+    // Toggle Exam Details
+    function toggleDetail(id) {
+        const row = document.getElementById('detail-' + id);
+        if(row) {
+            row.classList.toggle('open');
+        }
+    }
+
+    // Edit Modal
+    function openEditPatientModal() {
+        document.getElementById('editPatientModal').classList.add('open');
+    }
+
+    function closeEditPatientModal() {
+        document.getElementById('editPatientModal').classList.remove('open');
+    }
+    
+    // Close dropdown on outside click
+    document.addEventListener('click', function(e) {
+        const container = document.getElementById('searchContainer');
+        const dropdown = document.getElementById('searchDropdown');
+        if(container && dropdown && !container.contains(e.target)) {
+            dropdown.classList.remove('open');
+        }
+    });
+</script>
+</body>
+</html>

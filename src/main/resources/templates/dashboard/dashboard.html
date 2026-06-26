@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
@@ -17,17 +17,42 @@
 
     <nav class="nav">
         <a th:href="@{/dashboard}" class="active">
-                <span class="icon">
-                    <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-                </span>
+            <span class="icon">
+                <svg class="feather" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </span>
             Inicio
         </a>
-        <a th:href="@{/pacientes}" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+        <div class="nav-dropdown" sec:authorize="hasAuthority('MODULO_ATENCION_AL_PACIENTE')">
+            <a href="#" class=" dropdown-toggle" onclick="this.parentElement.classList.toggle('open'); return false;">
                 <span class="icon">
                     <svg class="feather" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                 </span>
-            Atencion al Paciente
-        </a>
+                Atencion al Paciente
+                <svg class="feather dropdown-icon" viewBox="0 0 24 24" style="margin-left:auto; width:16px; height:16px;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </a>
+            <div class="dropdown-menu">
+                <a th:href="@{/pacientes}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Pacientes
+                </a>
+                <a th:href="@{/historial}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Historial de Pacientes
+                </a>
+                <a th:href="@{/recetas/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Generar receta
+                </a>
+                <a th:href="@{/examenes/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar examen
+                </a>
+                <a th:href="@{/pacientes/nuevo}" class="dropdown-item">
+                    <span class="icon" style="width:12px; height:12px; border-radius:50%; background-color:#208f8c; display:inline-block; margin-right:8px;"></span>
+                    Registrar paciente
+                </a>
+            </div>
+        </div>
         <a href="#" sec:authorize="hasAuthority('MODULO_VENTAS')">
                 <span class="icon">
                     <svg class="feather" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6"/></svg>
@@ -173,3 +198,8 @@
 </main>
 </body>
 </html>
+
+
+
+
+

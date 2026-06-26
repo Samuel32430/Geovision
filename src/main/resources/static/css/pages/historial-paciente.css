@@ -1,0 +1,300 @@
+/* Historial Paciente Styles */
+
+.historial-search-container {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #e3efec;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.historial-search-container input {
+    flex: 1;
+    border: none;
+    font-size: 16px;
+    color: #4a5959;
+    padding: 12px 16px;
+    outline: none;
+}
+
+.historial-search-container input::placeholder {
+    color: #8aa3a0;
+}
+
+.btn-historial-search {
+    background: #208f8c;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.btn-historial-search:hover {
+    background: #1b7a77;
+}
+
+.search-icon-h {
+    color: #8aa3a0;
+    width: 20px;
+    height: 20px;
+}
+
+/* Patient Horizontal Card */
+.historial-patient-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e3efec;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    margin-bottom: 32px;
+    justify-content: space-between;
+}
+
+.h-card-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.h-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #208f8c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.h-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: #1f2d2d;
+    margin-bottom: 4px;
+}
+
+.h-details {
+    color: #6b8a86;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.h-card-actions {
+    display: flex;
+    gap: 16px;
+}
+
+.btn-h-action {
+    background: transparent;
+    border: none;
+    color: #208f8c;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+.btn-h-action:hover {
+    background: #e3efec;
+}
+
+/* Exams List Section */
+.historial-exams-section {
+    display: none; /* Hidden by default */
+}
+
+.historial-exams-section.visible {
+    display: block;
+}
+
+.exams-header-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #208f8c;
+    margin-bottom: 12px;
+    border-bottom: 2px solid #208f8c;
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+.exams-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+}
+
+.exams-table th {
+    background: #f8fcfb;
+    color: #8aa3a0;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-align: left;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e3efec;
+}
+
+.exams-row {
+    border-bottom: 1px solid #e3efec;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.exams-row:nth-child(even) {
+    background: #f4f6f8; /* striped effect as seen in design */
+}
+
+.exams-row:hover {
+    background: #e3efec;
+}
+
+.exams-row td {
+    padding: 16px 24px;
+    color: #4a5959;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.badge-estado {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.badge-estado.completado {
+    background: #e6f5f1;
+    color: #208f8c;
+}
+
+.badge-estado.archivado {
+    background: #f0f2f5;
+    color: #6c757d;
+}
+
+/* Exam Detail Accordion */
+.exam-detail-row {
+    display: none;
+    background: #f8fcfb;
+}
+
+.exam-detail-row.open {
+    display: table-row;
+}
+
+.exam-detail-container {
+    padding: 24px;
+    border: 1px solid #c2e0db;
+    border-radius: 8px;
+    margin: 16px 24px;
+    background: #f4fbf9;
+}
+
+.detail-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #208f8c;
+    margin-bottom: 16px;
+}
+
+.detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 2fr;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.d-col {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.d-col-header {
+    font-size: 11px;
+    color: #8aa3a0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.d-val {
+    font-size: 14px;
+    color: #4a5959;
+    font-weight: 600;
+}
+
+.btn-nuevo-examen {
+    display: inline-flex;
+    align-items: center;
+    background: #208f8c;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 24px;
+    transition: background 0.2s;
+}
+
+.btn-nuevo-examen:hover {
+    background: #1b7a77;
+}
+
+/* Modal Search Dropdown (for autocomplete) */
+.search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e3efec;
+    border-radius: 8px;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.1);
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+}
+
+.search-dropdown.open {
+    display: block;
+}
+
+.search-dropdown-item {
+    padding: 12px 24px;
+    cursor: pointer;
+    border-bottom: 1px solid #f4f6f8;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.search-dropdown-item:hover {
+    background: #f4fbf9;
+}
+
+.empty-search-msg {
+    text-align: center;
+    padding: 60px;
+    color: #8aa3a0;
+    font-size: 15px;
+}

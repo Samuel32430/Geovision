@@ -4,3 +4,8 @@
 @import url("css/components/buttons.css");
 @import url("css/components/listing.css");
 @import url("css/components/forms.css");
+@import url("css/pages/paciente-formulario.css");
+@import url("css/pages/paciente-listar.css");
+@import url("css/pages/examen-formulario.css");
+@import url("css/pages/receta-formulario.css");
+@import url("css/pages/historial-paciente.css");

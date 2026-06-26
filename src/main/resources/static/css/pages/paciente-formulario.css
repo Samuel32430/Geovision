@@ -1,0 +1,165 @@
+/* Formulario Paciente Styles - Full Width Refactor */
+
+.content-wrapper {
+    padding: 32px 40px;
+    width: 100%;
+}
+
+.form-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    width: 100%;
+}
+
+.card-header {
+    margin-bottom: 2rem;
+}
+
+.card-header h3 {
+    font-size: 1.4rem;
+    color: #0f1717;
+    font-weight: 800;
+    margin: 0 0 0.5rem 0;
+}
+
+.card-header p {
+    font-size: 0.9rem;
+    color: #6b8a86;
+    margin: 0;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #2bb3a3;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 1rem 0;
+    text-transform: uppercase;
+}
+
+.section-indicator {
+    width: 4px;
+    height: 14px;
+    background-color: #2bb3a3;
+    margin-right: 8px;
+    border-radius: 2px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+.form-group label {
+    font-size: 0.8rem;
+    color: #4a5959;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    width: 18px;
+    height: 18px;
+    stroke: #adb5bd;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid #e3efec;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    color: #2d3a3a;
+    transition: all 0.2s;
+    box-sizing: border-box;
+    background: #ffffff;
+}
+
+.form-input::placeholder {
+    color: #adb5bd;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #2bb3a3;
+    box-shadow: 0 0 0 3px rgba(43, 179, 163, 0.1);
+}
+
+.form-group > .form-input {
+    padding-left: 1rem; /* for inputs without icon */
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e3efec;
+    position: relative;
+    gap: 1rem;
+}
+
+.btn-save {
+    background-color: #2bb3a3;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+    background-color: #24998b;
+}
+
+.btn-cancel {
+    color: #6b8a86;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.btn-cancel:hover {
+    color: #4a5959;
+}
+
+.form-footer-inline {
+    position: absolute;
+    right: 0;
+    font-size: 0.8rem;
+    color: #8aa3a0;
+    display: flex;
+    align-items: center;
+}
