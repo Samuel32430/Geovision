@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
@@ -174,8 +174,14 @@
                         <div class="empty-state-text">Seleccione un paciente de la lista para visualizar los parámetros de su examen y generar la receta oftálmica.</div>
                     </div>
                     
+                    <!-- ERROR FLASH MESSAGE -->
+                    <div th:if="${error != null and examen != null}" class="empty-state-card" style="border: 1px solid #ffcdd2; background: #ffebee; flex-direction:row; padding:16px; align-items:center; justify-content:flex-start; margin-bottom: 24px;">
+                        <svg class="feather empty-state-icon" viewBox="0 0 24 24" style="color: #e53935; width:24px; height:24px; margin:0 16px 0 0;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                        <div class="empty-state-text" th:text="${error}" style="color: #c62828; font-weight: 600; margin:0; text-align:left;"></div>
+                    </div>
+
                     <!-- NO EXAM FOUND ERROR -->
-                    <div th:if="${error != null}" class="empty-state-card">
+                    <div th:if="${error != null and examen == null}" class="empty-state-card">
                         <svg class="feather empty-state-icon" viewBox="0 0 24 24" style="color: #e57373;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
                         <div class="empty-state-text" th:text="${error}" style="color: #d32f2f; font-weight: 600; margin-bottom: 24px;"></div>
                         <a th:href="@{/examenes/nuevo(idPaciente=${pacienteSeleccionado.id})}" class="btn-save" style="text-decoration:none; display:inline-block; padding:12px 24px;">Ir a Registrar Examen</a>
@@ -187,6 +193,13 @@
                             <div class="examen-title-group">
                                 <h3 style="display:flex; align-items:center; gap:12px;">
                                     Detalle del Examen
+                                    <select onchange="window.location.href='/recetas/nuevo?idPaciente=' + this.getAttribute('data-paciente') + '&idExamen=' + this.value" th:attr="data-paciente=${pacienteSeleccionado.id}" style="padding:6px; border:1px solid #c2e0db; border-radius:6px; outline:none; font-family:inherit; color:#00695c; font-weight:600; cursor:pointer; background:white;">
+                                        <option th:each="ex : ${examenesPaciente}" 
+                                                th:value="${ex.id}" 
+                                                th:text="${#temporals.format(ex.fechaExamen, 'dd MMM yyyy') + ' - ' + ex.empleadoRegistro.persona.nombres}"
+                                                th:selected="${ex.id == examen.id}">
+                                        </option>
+                                    </select>
                                     <button type="button" onclick="openEditModal()" style="background:#e6f5f1; border:none; color:#00695c; padding:6px 12px; border-radius:6px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px;">
                                         <svg class="feather" viewBox="0 0 24 24" style="width:14px; height:14px;"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
                                         Editar receta
