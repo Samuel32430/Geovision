@@ -40,4 +40,9 @@ public class RecetaOftalmicaInternaServiceImpl implements RecetaOftalmicaInterna
     public Iterable<RecetaOftalmicaInterna> findAll() {
         return recetaOftalmicaInternaRepository.findAll();
     }
+
+    @Override
+    public boolean existsByExamenId(Long examenId) {
+        return recetaOftalmicaInternaRepository.existsByExamenId(examenId);
+    }
 }

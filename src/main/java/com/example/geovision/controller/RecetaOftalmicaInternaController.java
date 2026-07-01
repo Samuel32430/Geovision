@@ -28,17 +28,25 @@ public class RecetaOftalmicaInternaController {
     private final PacienteService pacienteService;
 
     @GetMapping("/nuevo")
-    public String nuevaRecetaFormulario(@RequestParam(required = false) Long idPaciente, Model model) {
+    public String nuevaRecetaFormulario(@RequestParam(required = false) Long idPaciente,
+                                        @RequestParam(required = false) Long idExamen, Model model) {
         model.addAttribute("pacientes", pacienteService.findAll());
         
         if (idPaciente != null) {
-            Optional<ExamenAgudezaVisual> optExamen = examenService.getLatestExamenByPaciente(idPaciente);
+            model.addAttribute("pacienteSeleccionado", pacienteService.findById(idPaciente));
+            model.addAttribute("examenesPaciente", examenService.getHistorialByPaciente(idPaciente));
+            
+            Optional<ExamenAgudezaVisual> optExamen;
+            if (idExamen != null) {
+                optExamen = Optional.ofNullable(examenService.findById(idExamen));
+            } else {
+                optExamen = examenService.getLatestExamenByPaciente(idPaciente);
+            }
+
             if (optExamen.isPresent()) {
                 model.addAttribute("examen", optExamen.get());
-                model.addAttribute("pacienteSeleccionado", optExamen.get().getPaciente());
             } else {
                 model.addAttribute("error", "El paciente seleccionado no tiene exámenes visuales registrados.");
-                model.addAttribute("pacienteSeleccionado", pacienteService.findById(idPaciente));
             }
         }
         
@@ -50,6 +58,12 @@ public class RecetaOftalmicaInternaController {
                                 @AuthenticationPrincipal UsuarioPrincipal principal,
                                 RedirectAttributes redirectAttributes) {
                                     
+        if (recetaService.existsByExamenId(idExamen)) {
+            redirectAttributes.addFlashAttribute("error", "Ya se ha generado una receta para este examen visual anteriormente.");
+            ExamenAgudezaVisual examen = examenService.findById(idExamen);
+            return "redirect:/recetas/nuevo?idPaciente=" + examen.getPaciente().getId() + "&idExamen=" + idExamen;
+        }
+
         ExamenAgudezaVisual examen = examenService.findById(idExamen);
         
         RecetaOftalmicaInterna receta = new RecetaOftalmicaInterna();
